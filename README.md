@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # real-estate-project
 
 ## Project setup
@@ -30,4 +29,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 =======
 # real-estate-project
->>>>>>> acf6e2c6aedea08ae3480589eb90bf1b82ced19c
+
