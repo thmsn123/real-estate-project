@@ -3,6 +3,7 @@
     <h1>Rentals page!</h1>
     <div class="advs">
       <adv-list :advs="advs"></adv-list>
+      <button @click="getData">Get Data</button>
     </div>
   </div>
 </template>
