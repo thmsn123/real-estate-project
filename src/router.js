@@ -9,6 +9,7 @@ import AboutUs from "./views/AboutUs.vue";
 import Contact from "./views/Contact.vue";
 import Auth from "./views/Admin/Auth.vue"
 import Admin from "./views/Admin/AdminPanel.vue"
+import NewPost from "./views/Admin/NewPost.vue"
 import ErrorComponent from "./views/Error.vue"
 
 
@@ -62,6 +63,11 @@ export default new Router({
       path: "/admin",
       name: "admin",
       component: Admin
+    },
+    {
+      path: "/admin/newpost",
+      name: "newpost",
+      component: NewPost
     },
     {
       path: '*',

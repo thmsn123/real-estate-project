@@ -3,8 +3,8 @@
     <div class="auth-container">
       <form @submit.prevent="onSubmit">
         <div class="input-control">
-          <label for="username">User</label>
-          <input type="text" v-model="username" value="username" id="username" />
+          <label for="email">Email</label>
+          <input type="text" v-model="email" value="email" id="email" />
           <label for="password">Password</label>
           <input type="password" v-model="password" value="password" id />
         </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { required, minLength, alphaNum } from "vuelidate/lib/validators";
+import { required, minLength, alphaNum, email } from "vuelidate/lib/validators";
 
 export default {
   name: "AdminAuthPage",
@@ -23,42 +23,24 @@ export default {
   data() {
     return {
       isLogin: true,
-      username: "",
+      email: "",
       password: "",
       authToke: ""
     };
   },
   methods: {
     onSubmit() {
-      let appKey = "kid_SJ2Ll6dzB";
-      let appSecret = "e63e973905c147f3aec8540a92154af6";
-      let authString = btoa(`${this.username}:${this.password}`);
-      let options = {
-        method: "POST",
-        headers: {
-          Authorization: `Basic ${authString}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username: this.username,
-          password: this.password
-        })
-      };
-
-      fetch(`https://baas.kinvey.com/user/${appKey}/login`, options)
-        .then(res => res.json())
-        .then(data => {
-          this.authToken = data._kmd.authtoken;
-          console.log("User authenticated!");
-        })
-        .then(() => {
-        this.$router.push('/admin');
-      });
+      this.$store.dispatch('authenticateUser', {
+        email: this.email,
+        password: this.password
+      })
+      .then(()=> this.$router.push('/admin'))
     }
   },
   validations: {
-    username: {
-      required
+    email: {
+      required,
+      email
     },
     password: {
       required,
