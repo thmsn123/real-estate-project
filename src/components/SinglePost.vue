@@ -8,6 +8,14 @@
             <input type="text" v-model.trim="post.username" value="user-name" class="form-control" />
           </div>
           <div class="form-group">
+            <label for="postType">Post type:</label>
+            <select id="postType" v-model="post.postType" class="form-control">
+              <option value="news">News post</option>
+              <option value="sales">Sale post</option>
+              <option value="rentals">Rentals post</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="title">Title:</label>
             <input type="text" v-model.trim="post.title" value="title" class="form-control" />
           </div>
@@ -51,6 +59,7 @@ export default {
       disabled: false,
       post: {
         username: "",
+        postType: "",
         title: "",
         thumbnail: "",
         content: "",
@@ -60,7 +69,7 @@ export default {
   },
   methods: {
     onSave() {
-      this.$emit('submit', this.post);
+      this.$emit("submit", this.post);
     }
   },
   validations: {

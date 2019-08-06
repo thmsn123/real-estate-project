@@ -6,7 +6,7 @@
       :id="adv.id"
       :thumbnail="adv.thumbnail"
       :title="adv.title"
-      :previewText="adv.previewText"
+      :preview="adv.preview"
     />
   </section>
 </template>
