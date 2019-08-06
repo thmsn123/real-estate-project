@@ -6,7 +6,7 @@
         :style="{backgroundImage: 'url(' + thumbnail + ')'}"></div>
       <div class="adv-content">
         <h1>{{ title }}</h1>
-        <p>{{ previewText }}</p>
+        <p>{{ preview }}</p>
       </div>
     </article>
 </router-link>
@@ -24,7 +24,7 @@ export default {
       type: String,
       required: true
     },
-    previewText: {
+    preview: {
       type: String,
       required: true
     },
