@@ -31,11 +31,27 @@ export default {
     thumbnail: {
       type: String,
       required: true
+    },
+    postType: {
+      type: String,
+      required: true
     }
   },
   computed: {
     advLink() {
-      return '/forsale/' + this.id;
+      let currentRoute = ""
+      if(this.postType === "rentals") {
+        currentRoute = "rentals/"
+      }
+      else if(this.postType === "news"){
+        currentRoute = "news/"
+      }
+      else
+      {
+        currentRoute = "forsale/"
+      }
+
+      return currentRoute + this.id;
     }
   }
 }

@@ -1,13 +1,12 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1 class="post-title">{{ loadedAdv.title }}</h1>
+      <h1 class="post-title">{{ posts.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on {{ loadedAdv.updatedDate}}</div>
-        <div class="post-detail">Written by {{ loadedAdv.author }}</div>
+        <div class="post-detail">Written by {{ posts.username }}</div>
         <div class="post-detail">Adv id: {{this.$route.params.id}}</div>
       </div>
-      <p class="post-content">{{ loadedAdv.content }}</p>
+      <p class="post-content">{{ posts.content }}</p>
     </section>
     <section class="post-feedback">
       <p>
@@ -21,19 +20,20 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  data() {
+  data(){ 
     return {
-      loadedAdv: {
-        author: "ttomov",
-        content: "This is my first real estate advertisement.",
-        id: "-LhCIM8WE-BjAgCswarv",
-        previewText: "This is short preview",
-        thumbnail: "https://investinbg.co.uk/files/1485611348_3.jpg",
-        title: "House in Kavarna",
-        updatedDate: "2019-06-12T20:07:30.972Z"
-      }
-    };
+      posts: []
+    }
+  },
+  mounted() {
+    axios.get("https://real-estate-project-e32ed.firebaseio.com/sales/" + this.$route.params.id + ".json")
+    .then(response => {
+        this.posts = response.data;
+      })
+      .catch(e => console.error(e))
   }
 };
 </script>
