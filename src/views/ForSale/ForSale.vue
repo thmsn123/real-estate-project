@@ -2,7 +2,7 @@
   <div class="text-center">
     <h1>This is For Sale page!</h1>
     <div class="advs">
-      <adv-list :advs="loadedSales"></adv-list>
+      <adv-list :loadedPosts="loadedSales"></adv-list>
     </div>
   </div>
 </template>

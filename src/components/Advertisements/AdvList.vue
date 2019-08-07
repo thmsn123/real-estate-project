@@ -1,13 +1,15 @@
 <template>
   <section class="advertisement-list">
     <advertisement-preview
-      v-for="adv in advs"
-      :key="adv.id"
-      :id="adv.id"
-      :thumbnail="adv.thumbnail"
-      :title="adv.title"
-      :preview="adv.preview"
-    />
+      v-for="post in loadedPosts"
+      :key="post.id"
+      :id="post.id"
+      :thumbnail="post.thumbnail"
+      :title="post.title"
+      :preview="post.preview"
+      :postType="post.postType"
+    >
+    </advertisement-preview>
   </section>
 </template>
 
@@ -20,7 +22,7 @@ export default {
       AdvertisementPreview
   },
   props: {
-    advs: {
+    loadedPosts: {
       type: Array,
       required: true
     }

@@ -39,10 +39,10 @@ export default new Vuex.Store({
   actions: {
     getSales(context) {
       return axios.get("https://real-estate-project-e32ed.firebaseio.com/sales.json")
-        .then(data => {
+        .then(response => {
           const loadedSalesArray = [];
-          for (const key in data.data) {
-            loadedSalesArray.push({ ...data.data[key], id: key });
+          for (const key in response.data) {
+            loadedSalesArray.push({ ...response.data[key], id: key });
           }
           context.commit("setLoadedSales", loadedSalesArray);
         })
@@ -50,10 +50,10 @@ export default new Vuex.Store({
     },
     getRentals(context) {
       return axios.get("https://real-estate-project-e32ed.firebaseio.com/rentals.json")
-        .then(data => {
+        .then(response => {
           const loadedRentalsArray = [];
-          for (const key in data.data) {
-            loadedRentalsArray.push({ ...data.data[key], id: key });
+          for (const key in response.data) {
+            loadedRentalsArray.push({ ...response.data[key], id: key });
           }
           context.commit("setLoadedRentals", loadedRentalsArray);
         })

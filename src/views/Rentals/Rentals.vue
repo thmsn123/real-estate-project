@@ -2,7 +2,7 @@
   <div class="text-center">
     <h1>Rentals page!</h1>
     <div class="advs">
-      <adv-list :advs="loadedRentals"></adv-list>
+      <adv-list :loadedPosts="loadedRentals"></adv-list>
     </div>
   </div>
 </template>

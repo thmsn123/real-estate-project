@@ -1,12 +1,34 @@
 <template>
   <div class="text-center">
-    <h1>This is News Page</h1>
+    <h1>Rentals page!</h1>
+    <div class="advs">
+      <adv-list :loadedPosts="loadedRentals"></adv-list>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import AdvList from "../../components/Advertisements/AdvList";
+
+export default {
+  components: {
+    AdvList
+  },
+  computed: {
+    loadedRentals() {
+      return this.$store.getters.loadedRentals;
+    }
+  },
+  created() {
+    this.$store.dispatch('getRentals');
+  }
+};
 </script>
 
-<style>
+<style scoped>
+.advs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

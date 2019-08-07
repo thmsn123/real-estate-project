@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import News from "./views/News/News.vue";
 import Rentals from "./views/Rentals/Rentals.vue";
+import RentalsDetails from './views/Rentals/RentalsDetails.vue'
 import ForSale from "./views/ForSale/ForSale.vue";
 import ForSaleDetails from "./views/ForSale/ForSaleDetails.vue";
 import AboutUs from "./views/AboutUs.vue";
@@ -33,6 +34,11 @@ export default new Router({
       path: "/rentals",
       name: "rentals",
       component: Rentals
+    },
+    {
+      path: "/rentals/:id",
+      name: "rentalsdetails",
+      component: RentalsDetails
     },
     {
       path: "/forsale",
