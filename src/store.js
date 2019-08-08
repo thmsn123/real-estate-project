@@ -37,7 +37,7 @@ export default new Vuex.Store({
       state.loadedNews = loadedNews;
     },
     setToken(state, token) {
-      state.token = token;
+      state.authToken = token;
     }
   },
   actions: {
