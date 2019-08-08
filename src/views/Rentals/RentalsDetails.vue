@@ -4,7 +4,6 @@
       <h1 class="post-title">{{ posts.title }}</h1>
       <div class="post-details">
         <div class="post-detail">Written by {{ posts.username }}</div>
-        <div class="post-detail">Adv id: {{this.$route.params.id}}</div>
       </div>
       <p class="post-content">{{ posts.content }}</p>
     </section>

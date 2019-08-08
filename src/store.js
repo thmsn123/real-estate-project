@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import Cookie from "js-cookie";
 
 Vue.use(Vuex);
 
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     loadedNews(state) {
       return state.loadedNews
+    },
+    isAuthenticated(state){
+      return state.authToken != null;
     }
   },
   mutations: {
@@ -29,7 +33,7 @@ export default new Vuex.Store({
     setLoadedRentals(state, loadedRentals) {
       state.loadedRentals = loadedRentals;
     },
-    setLoadednews(state, loadedNews) {
+    setLoadedNews(state, loadedNews) {
       state.loadedNews = loadedNews;
     },
     setToken(state, token) {
@@ -37,6 +41,17 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    getNews(context) {
+      return axios.get("https://real-estate-project-e32ed.firebaseio.com/news.json")
+        .then(response => {
+          const loadedNewsArray = [];
+          for (const key in response.data) {
+            loadedNewsArray.push({ ...response.data[key], id: key });
+          }
+          context.commit("setLoadedNews", loadedNewsArray);
+        })
+        .catch(e => context.error(e));
+    },
     getSales(context) {
       return axios.get("https://real-estate-project-e32ed.firebaseio.com/sales.json")
         .then(response => {
@@ -67,7 +82,11 @@ export default new Vuex.Store({
         password: authData.password,
         returnSecureToken: true
       }).then(result => {
+        console.log(result);
+        
         context.commit('setToken', result.data.idToken);
+        localStorage.setItem("token", result.data.idToken);
+        localStorage.setItem('tokenExpiration', new Date().getTime() + +result.data.expiresIn * 1000);
       })
         .catch(e => {
           console.log(e);

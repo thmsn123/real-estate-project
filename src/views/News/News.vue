@@ -1,32 +1,31 @@
 <template>
   <div class="text-center">
-    <h1>Rentals page!</h1>
-    <div class="advs">
-      <adv-list :loadedPosts="loadedRentals"></adv-list>
+    <div class="posts">
+      <post-list :loadedPosts="loadedNews"></post-list>
     </div>
   </div>
 </template>
 
 <script>
-import AdvList from "../../components/Advertisements/AdvList";
+import PostList from "../../components/Posts/PostList";
 
 export default {
   components: {
-    AdvList
+    PostList
   },
   computed: {
-    loadedRentals() {
-      return this.$store.getters.loadedRentals;
+    loadedNews() {
+      return this.$store.getters.loadedNews;
     }
   },
   created() {
-    this.$store.dispatch('getRentals');
+    this.$store.dispatch('getNews');
   }
 };
 </script>
 
 <style scoped>
-.advs {
+.posts {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,18 +1,18 @@
 <template>
   <div class="text-center">
     <h1>Rentals page!</h1>
-    <div class="advs">
-      <adv-list :loadedPosts="loadedRentals"></adv-list>
+    <div class="posts">
+      <post-list :loadedPosts="loadedRentals"></post-list>
     </div>
   </div>
 </template>
 
 <script>
-import AdvList from "../../components/Advertisements/AdvList";
+import PostList from "../../components/Posts/PostList";
 
 export default {
   components: {
-    AdvList
+    PostList
   },
   computed: {
     loadedRentals() {
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.advs {
+.posts {
   display: flex;
   justify-content: center;
   align-items: center;

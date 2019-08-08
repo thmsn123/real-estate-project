@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import News from "./views/News/News.vue";
+import NewsDetails from "./views/News/NewsDetails.vue"
 import Rentals from "./views/Rentals/Rentals.vue";
 import RentalsDetails from './views/Rentals/RentalsDetails.vue'
 import ForSale from "./views/ForSale/ForSale.vue";
@@ -12,11 +13,14 @@ import Auth from "./views/Admin/Auth.vue"
 import Admin from "./views/Admin/AdminPanel.vue"
 import NewPost from "./views/Admin/NewPost.vue"
 import ErrorComponent from "./views/Error.vue"
+import checkAuth from "./middleware/auth.js"
+import store from "../src/store.js"
+import middlewarePipeline from "./middleware/middlewarePipeline.js"
 
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -51,6 +55,11 @@ export default new Router({
       component: ForSaleDetails
     },
     {
+      path: "/news/:id",
+      name: "newsdetails",
+      component: NewsDetails
+    },
+    {
       path: "/aboutus",
       name: "aboutus",
       component: AboutUs
@@ -68,7 +77,10 @@ export default new Router({
     {
       path: "/admin",
       name: "admin",
-      component: Admin
+      component: Admin,
+      meta: {
+        middleware: [checkAuth]
+      }
     },
     {
       path: "/admin/newpost",
@@ -81,3 +93,26 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.middleware) {
+      return next()
+  }
+  const middleware = to.meta.middleware
+
+  const context = {
+      to,
+      from,
+      next,
+      store
+  }
+
+
+  return middleware[0]({
+      ...context,
+      next: middlewarePipeline(context, middleware, 1)
+  })
+
+})
+
+export default router
