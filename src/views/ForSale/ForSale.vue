@@ -1,18 +1,18 @@
 <template>
   <div class="text-center">
     <h1>This is For Sale page!</h1>
-    <div class="advs">
-      <adv-list :loadedPosts="loadedSales"></adv-list>
+    <div class="posts">
+      <post-list :loadedPosts="loadedSales"></post-list>
     </div>
   </div>
 </template>
 
 <script>
-import AdvList from "../../components/Advertisements/AdvList";
+import PostList from "../../components/Posts/PostList.vue";
 
 export default {
   components: {
-    AdvList
+    PostList
   },
   computed: {
     loadedSales() {
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.advs {
+.posts {
   display: flex;
   justify-content: center;
   align-items: center;

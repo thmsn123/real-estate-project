@@ -1,10 +1,10 @@
 <template>
-<router-link :to="advLink" class="adv-preview">
+<router-link :to="getPostLink" class="post-preview">
     <article>
       <div
-        class="adv-thumbnail"
+        class="post-thumbnail"
         :style="{backgroundImage: 'url(' + thumbnail + ')'}"></div>
-      <div class="adv-content">
+      <div class="post-content">
         <h1>{{ title }}</h1>
         <p>{{ preview }}</p>
       </div>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'AdvertisementPreview',
+  name: 'PostPreview',
   props: {
     id: {
       type: String,
@@ -38,7 +38,7 @@ export default {
     }
   },
   computed: {
-    advLink() {
+    getPostLink() {
       let currentRoute = ""
       if(this.postType === "rentals") {
         currentRoute = "rentals/"
@@ -59,7 +59,7 @@ export default {
 
 
 <style scoped>
-.adv-preview {
+.post-preview {
   border: 1px solid #ccc;
   box-shadow: 0 2px 2px #ccc;
   background-color: white;
@@ -72,26 +72,26 @@ a {
 }
 
 @media (min-width: 850px) {
-  .adv-preview {
+  .post-preview {
     width: 400px;
     margin: 10px;
   }
 }
 
-.adv-thumbnail {
+.post-thumbnail {
   width: 100%;
   height: 200px;
   background-position: center;
   background-size: cover;
 }
 
-.adv-content {
+.post-content {
   padding: 10px;
   text-align: center;
 }
 
-a:hover .adv-content,
-a:active .adv-content {
+a:hover .post-content,
+a:active .post-content {
   background-color: #ccc;
 }
 </style>

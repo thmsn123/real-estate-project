@@ -1,6 +1,6 @@
 <template>
-  <section class="advertisement-list">
-    <advertisement-preview
+  <section class="post-list">
+    <post-preview
       v-for="post in loadedPosts"
       :key="post.id"
       :id="post.id"
@@ -9,17 +9,17 @@
       :preview="post.preview"
       :postType="post.postType"
     >
-    </advertisement-preview>
+    </post-preview>
   </section>
 </template>
 
 <script>
-import AdvertisementPreview from './AdvPreview'
+import PostPreview from './PostPreview'
 
 export default {
-  name: "advertisementList",
+  name: "PostList",
   components: {
-      AdvertisementPreview
+      PostPreview
   },
   props: {
     loadedPosts: {
@@ -32,7 +32,7 @@ export default {
 
 
 <style scoped>
-.advertisement-list {
+.post-list {
   display: flex;
   padding: 20px;
   box-sizing: border-box;
