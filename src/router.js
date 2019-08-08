@@ -85,7 +85,10 @@ const router = new Router({
     {
       path: "/admin/newpost",
       name: "newpost",
-      component: NewPost
+      component: NewPost,
+      meta: {
+        middleware: [checkAuth]
+      }
     },
     {
       path: '*',
