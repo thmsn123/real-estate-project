@@ -13,14 +13,11 @@ import Auth from "./views/Admin/Auth.vue"
 import Admin from "./views/Admin/AdminPanel.vue"
 import NewPost from "./views/Admin/NewPost.vue"
 import ErrorComponent from "./views/Error.vue"
-import checkAuth from "./middleware/auth.js"
 import store from "../src/store.js"
-import middlewarePipeline from "./middleware/middlewarePipeline.js"
-
 
 Vue.use(Router);
 
-const router = new Router({
+export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -72,22 +69,46 @@ const router = new Router({
     {
       path: "/auth",
       name: "auth",
-      component: Auth
+      component: Auth,
+      beforeEnter(to, from, next) {
+        if (!store.getters.isAuthenticated) {
+          console.log('not auth');
+          
+          next()
+        } else {
+          console.log('auth');
+          next({
+            name: "home"
+          });
+        }
+      }
     },
     {
       path: "/admin",
       name: "admin",
       component: Admin,
-      meta: {
-        middleware: [checkAuth]
+      beforeEnter(to, from, next) {
+        if (store.getters.isAuthenticated) {
+          next()
+        } else {
+          next({
+            name: "auth"
+          });
+        }
       }
     },
     {
       path: "/admin/newpost",
       name: "newpost",
       component: NewPost,
-      meta: {
-        middleware: [checkAuth]
+      beforeEnter(to, from, next) {
+        if (store.getters.isAuthenticated) {
+          next()
+        } else {
+          next({
+            name: "auth"
+          });
+        }
       }
     },
     {
@@ -96,26 +117,3 @@ const router = new Router({
     }
   ]
 });
-
-router.beforeEach((to, from, next) => {
-  if (!to.meta.middleware) {
-      return next()
-  }
-  const middleware = to.meta.middleware
-
-  const context = {
-      to,
-      from,
-      next,
-      store
-  }
-
-
-  return middleware[0]({
-      ...context,
-      next: middlewarePipeline(context, middleware, 1)
-  })
-
-})
-
-export default router
