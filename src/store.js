@@ -22,8 +22,15 @@ export default new Vuex.Store({
     loadedNews(state) {
       return state.loadedNews
     },
-    isAuthenticated(state){
-      return state.authToken != null;
+    isAuthenticated(state) {
+      let token = localStorage.getItem('token');
+      let expirationDate = localStorage.getItem("tokenExpiration");
+
+      if (token !== null || state.authToken !== null) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   mutations: {
@@ -82,8 +89,6 @@ export default new Vuex.Store({
         password: authData.password,
         returnSecureToken: true
       }).then(result => {
-        console.log(result);
-        
         context.commit('setToken', result.data.idToken);
         localStorage.setItem("token", result.data.idToken);
         localStorage.setItem('tokenExpiration', new Date().getTime() + +result.data.expiresIn * 1000);

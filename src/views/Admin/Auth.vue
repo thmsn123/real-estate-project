@@ -4,11 +4,11 @@
       <form @submit.prevent="onSubmit">
         <div class="input-control">
           <label for="email">Email</label>
-          <input type="text" v-model="email" value="email" id="email" />
+          <input type="text" v-model="$v.email.$model" value="email" id="email" />
           <label for="password">Password</label>
-          <input type="password" v-model="password" value="password" id />
+          <input type="password" v-model="$v.password.$model" value="password" id />
         </div>
-        <button value="Log in">Log in</button>
+        <button value="Log in" :disabeld="$v.error">Log in</button>
       </form>
     </div>
   </div>
