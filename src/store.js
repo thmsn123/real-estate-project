@@ -23,14 +23,7 @@ export default new Vuex.Store({
       return state.loadedNews
     },
     isAuthenticated(state) {
-      let token = localStorage.getItem('token');
-      let expirationDate = localStorage.getItem("tokenExpiration");
-
-      if (token !== null || state.authToken !== null) {
-        return true
-      } else {
-        return false
-      }
+      return state.authToken != null;
     }
   },
   mutations: {
@@ -45,6 +38,9 @@ export default new Vuex.Store({
     },
     setToken(state, token) {
       state.authToken = token;
+    },
+    clearToken(state) {
+      state.authToken = null;
     }
   },
   actions: {
@@ -96,6 +92,24 @@ export default new Vuex.Store({
         .catch(e => {
           console.log(e);
         });
+    },
+    initAuth(context) {
+      let token = localStorage.getItem('token');
+      let expirationDate = localStorage.getItem("tokenExpiration");
+
+      if (token) {
+        context.commit('setToken', token);
+      }
+
+      if (new Date().getTime() > +expirationDate || !token) {
+        context.dispatch('logOut');
+        return;
+      }
+    },
+    logOut(context) {
+      context.commit('clearToken');
+      localStorage.removeItem("token");
+      localStorage.removeItem("tokenExpiration");
     },
     addPost(context, post) {
 

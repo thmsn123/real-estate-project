@@ -18,7 +18,7 @@
         <b-navbar-nav class="ml-auto">
           <template v-if="isAuthenticated">
             <router-link class="nav-link" active-class="active" to="/admin">Admin</router-link>
-            <a class="nav-link" active-class="active" href="/" @click="clearSession">Log out</a>
+            <a class="nav-link" active-class="active" href="/" @click="logOut">Log out</a>
           </template>
           <template v-else>
             <router-link class="nav-link" active-class="active" to="/auth">Login</router-link>
@@ -31,7 +31,7 @@
 
 <script>
 import backgroundImage from "../assets/background.jpg";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "NavBar",
@@ -47,9 +47,7 @@ export default {
     ...mapGetters(["isAuthenticated"])
   },
   methods: {
-    clearSession() {
-      localStorage.clear();
-    }
+    ...mapActions(['logOut'])
   }
 };
 </script>

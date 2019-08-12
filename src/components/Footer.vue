@@ -1,12 +1,6 @@
 <template>
   <div>
-    <footer>
-      <p>Author: Toma Tomov</p>
-      <p>
-        Contact information:
-        <a href="mailto:t.a.tomov@gmail.com">t.a.tomov@gmail.com</a>.
-      </p>
-    </footer>
+    <footer>&copy; Copyright 2019 ttomov</footer>
   </div>
 </template>
 
