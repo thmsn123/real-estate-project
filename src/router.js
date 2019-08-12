@@ -17,7 +17,7 @@ import store from "../src/store.js"
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -69,47 +69,17 @@ export default new Router({
     {
       path: "/auth",
       name: "auth",
-      component: Auth,
-      beforeEnter(to, from, next) {
-        if (!store.getters.isAuthenticated) {
-          console.log('not auth');
-          
-          next()
-        } else {
-          console.log('auth');
-          next({
-            name: "home"
-          });
-        }
-      }
+      component: Auth
     },
     {
       path: "/admin",
       name: "admin",
-      component: Admin,
-      beforeEnter(to, from, next) {
-        if (store.getters.isAuthenticated) {
-          next()
-        } else {
-          next({
-            name: "auth"
-          });
-        }
-      }
+      component: Admin
     },
     {
       path: "/admin/newpost",
       name: "newpost",
-      component: NewPost,
-      beforeEnter(to, from, next) {
-        if (store.getters.isAuthenticated) {
-          next()
-        } else {
-          next({
-            name: "auth"
-          });
-        }
-      }
+      component: NewPost
     },
     {
       path: '*',
@@ -117,3 +87,27 @@ export default new Router({
     }
   ]
 });
+
+//add navigation guards;
+router.beforeEach((to, from, next) => {
+  store.dispatch('initAuth');
+
+  if (to.fullPath === '/auth') {
+    if (store.getters.isAuthenticated) {
+      next('/');
+    }
+  }
+  if (to.fullPath === '/admin') {
+    if (!store.getters.isAuthenticated) {
+      next('/auth');
+    }
+  }
+  if (to.fullPath === '/admin/newpost') {
+    if (!store.getters.isAuthenticated) {
+      next('/auth');
+    }
+  }
+  next();
+});
+
+export default router;
