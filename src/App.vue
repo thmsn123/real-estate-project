@@ -14,6 +14,11 @@ export default {
   components: {
     NavBar,
     NavFooter
+  },
+  created() {
+    this.$store.dispatch('getPosts', 'news');
+    this.$store.dispatch('getPosts', 'sales');
+    this.$store.dispatch('getPosts', 'rentals');
   }
 }
 </script>

@@ -8,11 +8,23 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     authToken: null,
+    singlePost: [],
     loadedSales: [],
     loadedRentals: [],
     loadedNews: []
   },
   getters: {
+    currentPost: state => route => {
+      if (route.name === "forsaledetails") {
+        state.singlePost = state.loadedSales.find(x => x.id === route.params.id);
+      } else if (route.name === "rentalsdetails") {
+        state.singlePost = state.loadedRentals.find(x => x.id === route.params.id);
+      } else {
+        state.singlePost = state.loadedNews.find(x => x.id === route.params.id);
+      }
+
+      return state.singlePost;
+    },
     loadedSales(state) {
       return state.loadedSales
     },
@@ -44,38 +56,40 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getNews(context) {
-      return axios.get("https://real-estate-project-e32ed.firebaseio.com/news.json")
+    getPosts(context, postType) {
+
+      return axios.get("https://real-estate-project-e32ed.firebaseio.com/" + postType + ".json")
         .then(response => {
-          const loadedNewsArray = [];
+          const loadedPosts = [];
           for (const key in response.data) {
-            loadedNewsArray.push({ ...response.data[key], id: key });
+            loadedPosts.push({ ...response.data[key], id: key });
           }
-          context.commit("setLoadedNews", loadedNewsArray);
+
+          if (postType === "news") {
+            context.commit("setLoadedNews", loadedPosts);
+          } else if (postType === "sales") {
+            context.commit("setLoadedSales", loadedPosts);
+          } else {
+            context.commit("setLoadedRentals", loadedPosts);
+          }
         })
         .catch(e => context.error(e));
     },
-    getSales(context) {
-      return axios.get("https://real-estate-project-e32ed.firebaseio.com/sales.json")
-        .then(response => {
-          const loadedSalesArray = [];
-          for (const key in response.data) {
-            loadedSalesArray.push({ ...response.data[key], id: key });
-          }
-          context.commit("setLoadedSales", loadedSalesArray);
+    addPost(context, post) {
+      return axios
+        .post("https://real-estate-project-e32ed.firebaseio.com/" + post.postType + ".json?auth=" + context.state.token, post)
+        .then(result => {
+          console.log(result);
         })
-        .catch(e => context.error(e));
+        .catch(e => console.log(e));
     },
-    getRentals(context) {
-      return axios.get("https://real-estate-project-e32ed.firebaseio.com/rentals.json")
-        .then(response => {
-          const loadedRentalsArray = [];
-          for (const key in response.data) {
-            loadedRentalsArray.push({ ...response.data[key], id: key });
-          }
-          context.commit("setLoadedRentals", loadedRentalsArray);
+    addComment(context, post) {
+      return axios
+        .post("https://real-estate-project-e32ed.firebaseio.com/comments.json?auth=" + context.state.token, post)
+        .then(result => {
+          console.log(result);
         })
-        .catch(e => context.error(e));
+        .catch(e => console.log(e));
     },
     authenticateUser(context, authData) {
       let authUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDHidM-Bk0JA3eWcQ2M8iyXK4wqUWGHwmA";
@@ -101,24 +115,17 @@ export default new Vuex.Store({
         context.commit('setToken', token);
       }
 
-      if (new Date().getTime() > +expirationDate || !token) {
-        context.dispatch('logOut');
-        return;
+      if (expirationDate) {
+        if (new Date().getTime() > +expirationDate || !token) {
+          context.dispatch('logOut');
+          return;
+        }
       }
     },
     logOut(context) {
       context.commit('clearToken');
       localStorage.removeItem("token");
       localStorage.removeItem("tokenExpiration");
-    },
-    addPost(context, post) {
-
-      return axios
-        .post("https://real-estate-project-e32ed.firebaseio.com/" + post.postType + ".json?auth=" + context.state.token, post)
-        .then(result => {
-          console.log(result);
-        })
-        .catch(e => console.log(e));
     }
   }
 });

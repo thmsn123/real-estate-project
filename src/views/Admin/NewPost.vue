@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SinglePost from "../../components/SinglePost";
+import SinglePost from "../../components/Posts/SinglePost.vue";
 export default {
   components: {
     SinglePost

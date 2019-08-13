@@ -1,11 +1,11 @@
 <template>
-  <div class="single-post-page">
+  <div class="single-post-page" v-if="currentRental">
     <section class="post">
-      <h1 class="post-title">{{ posts.title }}</h1>
+      <h1 class="post-title">{{ currentRental.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Written by {{ posts.username }}</div>
+        <div class="post-detail">Written by {{ currentRental.username }}</div>
       </div>
-      <p class="post-content">{{ posts.content }}</p>
+      <p class="post-content">{{ currentRental.content }}</p>
     </section>
     <section class="post-feedback">
       <p>
@@ -19,20 +19,14 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapGetters } from "vuex";
 
 export default {
-  data(){ 
-    return {
-      posts: []
+  computed: {
+    ...mapGetters(["currentPost"]),
+    currentRental(){
+      return this.currentPost(this.$route)
     }
-  },
-  mounted() {
-    axios.get("https://real-estate-project-e32ed.firebaseio.com/rentals/" + this.$route.params.id + ".json")
-    .then(response => {
-        this.posts = response.data;
-      })
-      .catch(e => console.error(e))
   }
 };
 </script>
