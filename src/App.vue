@@ -19,6 +19,7 @@ export default {
     this.$store.dispatch('getPosts', 'news');
     this.$store.dispatch('getPosts', 'sales');
     this.$store.dispatch('getPosts', 'rentals');
+    this.$store.dispatch('getComments');
   }
 }
 </script>

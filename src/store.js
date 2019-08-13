@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import Cookie from "js-cookie";
 
 Vue.use(Vuex);
 
@@ -11,6 +10,7 @@ export default new Vuex.Store({
     singlePost: [],
     loadedSales: [],
     loadedRentals: [],
+    loadedComments: [],
     loadedNews: []
   },
   getters: {
@@ -26,13 +26,16 @@ export default new Vuex.Store({
       return state.singlePost;
     },
     loadedSales(state) {
-      return state.loadedSales
+      return state.loadedSales;
     },
     loadedRentals(state) {
-      return state.loadedRentals
+      return state.loadedRentals;
     },
     loadedNews(state) {
-      return state.loadedNews
+      return state.loadedNews;
+    },
+    loadedComments(state) {
+      return state.loadedComments;
     },
     isAuthenticated(state) {
       return state.authToken != null;
@@ -47,6 +50,9 @@ export default new Vuex.Store({
     },
     setLoadedNews(state, loadedNews) {
       state.loadedNews = loadedNews;
+    },
+    setLoadedComments(state, loadedComments) {
+      state.loadedComments = loadedComments;
     },
     setToken(state, token) {
       state.authToken = token;
@@ -75,9 +81,22 @@ export default new Vuex.Store({
         })
         .catch(e => context.error(e));
     },
+    getComments(context) {
+      console.log('in get comments');
+      return axios.get("https://real-estate-project-e32ed.firebaseio.com/comments.json")
+        .then(response => {
+          const loadedComments = [];
+          for (const key in response.data) {
+            loadedComments.push({ ...response.data[key], id: key });
+          }
+
+          context.commit("setLoadedComments", loadedComments);
+        })
+        .catch(e => console.log(e));
+    },
     addPost(context, post) {
       return axios
-        .post("https://real-estate-project-e32ed.firebaseio.com/" + post.postType + ".json?auth=" + context.state.token, post)
+        .post("https://real-estate-project-e32ed.firebaseio.com/" + post.postType + ".json?auth=" + context.state.authToken, post)
         .then(result => {
           console.log(result);
         })
@@ -85,7 +104,7 @@ export default new Vuex.Store({
     },
     addComment(context, post) {
       return axios
-        .post("https://real-estate-project-e32ed.firebaseio.com/comments.json?auth=" + context.state.token, post)
+        .post("https://real-estate-project-e32ed.firebaseio.com/comments.json?auth=" + context.state.authToken, post)
         .then(result => {
           console.log(result);
         })
