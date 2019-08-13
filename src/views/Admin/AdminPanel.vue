@@ -2,7 +2,7 @@
     <div class="text-center">
         <div>
             <button class="btn btn-primary" @click="$router.push('/admin/newpost')">Add new post</button> 
-            <button class="btn btn-primary">Log Out</button>
+            <button class="btn btn-primary" @click="$router.push('/admin/comments')">Comments</button>
         </div>
     </div>
 </template>

@@ -9,18 +9,14 @@
 
 <script>
 import PostList from "../../components/Posts/PostList";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     PostList
   },
   computed: {
-    loadedRentals() {
-      return this.$store.getters.loadedRentals;
-    }
-  },
-  created() {
-    this.$store.dispatch('getRentals');
+    ...mapGetters(["loadedRentals"])
   }
 };
 </script>

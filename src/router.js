@@ -12,6 +12,7 @@ import Contact from "./views/Contact.vue";
 import Auth from "./views/Admin/Auth.vue"
 import Admin from "./views/Admin/AdminPanel.vue"
 import NewPost from "./views/Admin/NewPost.vue"
+import Comments from './views/Admin/Comments.vue'
 import ErrorComponent from "./views/Error.vue"
 import store from "../src/store.js"
 
@@ -82,6 +83,11 @@ const router = new Router({
       component: NewPost
     },
     {
+      path: "/admin/comments",
+      name: "comments",
+      component: Comments
+    },
+    {
       path: '*',
       component: ErrorComponent
     }
@@ -103,6 +109,11 @@ router.beforeEach((to, from, next) => {
     }
   }
   if (to.fullPath === '/admin/newpost') {
+    if (!store.getters.isAuthenticated) {
+      next('/auth');
+    }
+  }
+  if (to.fullPath === '/admin/comments') {
     if (!store.getters.isAuthenticated) {
       next('/auth');
     }

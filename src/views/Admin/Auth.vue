@@ -16,6 +16,7 @@
 
 <script>
 import { required, minLength, alphaNum, email } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
 
 export default {
   name: "AdminAuthPage",
@@ -29,8 +30,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["authenticateUser"]),
     onSubmit() {
-      this.$store.dispatch('authenticateUser', {
+      this.authenticateUser( {
         email: this.email,
         password: this.password
       })
