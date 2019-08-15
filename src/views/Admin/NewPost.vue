@@ -1,16 +1,16 @@
 <template>
   <div>
-    <single-post @submit="onSubmitted"></single-post>
+    <post-details @submit="onSubmitted"></post-details>
   </div>
 </template>
 
 <script>
-import SinglePost from "../../components/Posts/SinglePost.vue";
+import PostDetails from "../../components/Posts/PostDetails.vue";
 import { mapActions } from "vuex";
 
 export default {
   components: {
-    SinglePost
+    PostDetails
   },
   methods: {
     ...mapActions(["addPost", "getPosts"]),

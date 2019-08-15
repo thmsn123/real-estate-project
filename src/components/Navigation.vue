@@ -12,7 +12,7 @@
         <router-link class="nav-link" active-class="active" to="/">Home</router-link>
         <router-link class="nav-link" active-class="active" to="/news">News</router-link>
         <router-link class="nav-link" active-class="active" to="/rentals">Rentals</router-link>
-        <router-link class="nav-link" active-class="active" to="/forSale">For Sale</router-link>
+        <router-link class="nav-link" active-class="active" to="/sales">Sales</router-link>
         <router-link class="nav-link" active-class="active" to="/aboutUs">About Us</router-link>
         <router-link class="nav-link" active-class="active" to="/contact">Contact</router-link>
         <b-navbar-nav class="ml-auto">

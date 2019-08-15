@@ -1,45 +1,45 @@
 <template>
-  <div class="single-post-page" v-if="currentRental">
+  <div class="single-post-page" v-if="currentSale">
     <v-card>
-      <v-toolbar-title>{{ currentRental.title }}</v-toolbar-title>
+      <v-toolbar-title>{{ currentSale.title }}</v-toolbar-title>
       <img
         class="image"
-        v-for="(image, i) in currentRental.gallery"
+        v-for="(image, i) in currentSale.gallery"
         :src="image"
         :key="i"
         @click="index = i"
       />
-      <vue-gallery-slideshow :images="currentRental.gallery" :index="index" @close="index = null"></vue-gallery-slideshow>
+      <vue-gallery-slideshow :images="currentSale.gallery" :index="index" @close="index = null"></vue-gallery-slideshow>
       <div class="description">
         <v-list class="mx-auto" max-width="400" tile>
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title>Price</v-list-item-title>
-              <v-list-item-subtitle>{{currentRental.price}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{currentSale.price}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title>Property type</v-list-item-title>
-              <v-list-item-subtitle>{{currentRental.propertyType}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{currentSale.propertyType}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title>Location</v-list-item-title>
-              <v-list-item-subtitle>{{currentRental.location}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{currentSale.location}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title>Construction year</v-list-item-title>
-              <v-list-item-subtitle>{{currentRental.constructionYear}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{currentSale.constructionYear}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
       </div>
       <section class="post">
-        <p class="post-content">{{ currentRental.content }}</p>
+        <p class="post-content">{{ currentSale.content }}</p>
       </section>
       <section class="post-feedback">
         <router-link :to="{path: '/contact'}">Contact us</router-link>
@@ -63,8 +63,8 @@ export default {
   },
   computed: {
     ...mapGetters(["currentPost"]),
-    currentRental(){
-      return this.currentPost(this.$route)
+    currentSale() {
+      return this.currentPost(this.$route);
     }
   }
 };
