@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <h1>Rentals page!</h1>
+    <filters></filters>
     <div class="posts">
       <post-list :loadedPosts="loadedRentals"></post-list>
     </div>
@@ -8,12 +8,14 @@
 </template>
 
 <script>
+import Filters from "../../components/Filters/Filters"
 import PostList from "../../components/Posts/PostList";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    PostList
+    PostList,
+    Filters
   },
   computed: {
     ...mapGetters(["loadedRentals"])

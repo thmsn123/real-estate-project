@@ -15,7 +15,7 @@ export default new Vuex.Store({
   },
   getters: {
     currentPost: state => route => {
-      if (route.name === "forsaledetails") {
+      if (route.name === "salesdetails") {
         state.singlePost = state.loadedSales.find(x => x.id === route.params.id);
       } else if (route.name === "rentalsdetails") {
         state.singlePost = state.loadedRentals.find(x => x.id === route.params.id);
@@ -68,6 +68,9 @@ export default new Vuex.Store({
         .then(response => {
           const loadedPosts = [];
           for (const key in response.data) {
+            if (response.data[key].gallery) {
+              response.data[key].gallery = response.data[key].gallery.split(",");
+            }
             loadedPosts.push({ ...response.data[key], id: key });
           }
 
@@ -82,7 +85,6 @@ export default new Vuex.Store({
         .catch(e => context.error(e));
     },
     getComments(context) {
-      console.log('in get comments');
       return axios.get("https://real-estate-project-e32ed.firebaseio.com/comments.json")
         .then(response => {
           const loadedComments = [];

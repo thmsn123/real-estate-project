@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <router-view />
-    <!-- <nav-footer></nav-footer> -->
+    <router-view class="view"/>
+    <nav-footer></nav-footer>
   </div>
 </template>
 
@@ -25,5 +25,7 @@ export default {
 </script>
 
 <style>
-
+  .view{
+    min-height: 450px;
+  }
 </style>

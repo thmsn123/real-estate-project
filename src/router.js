@@ -5,8 +5,8 @@ import News from "./views/News/News.vue";
 import NewsDetails from "./views/News/NewsDetails.vue"
 import Rentals from "./views/Rentals/Rentals.vue";
 import RentalsDetails from './views/Rentals/RentalsDetails.vue'
-import ForSale from "./views/ForSale/ForSale.vue";
-import ForSaleDetails from "./views/ForSale/ForSaleDetails.vue";
+import Sales from "./views/Sales/Sales.vue";
+import SalesDetails from "./views/Sales/SalesDetails.vue";
 import AboutUs from "./views/AboutUs.vue";
 import Contact from "./views/Contact.vue";
 import Auth from "./views/Admin/Auth.vue"
@@ -25,71 +25,113 @@ const router = new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      meta: {
+        title: "Home"
+      }
     },
     {
       path: "/news",
       name: "news",
-      component: News
+      component: News,
+      meta: {
+        title: "News"
+      }
     },
     {
       path: "/rentals",
       name: "rentals",
-      component: Rentals
+      component: Rentals,
+      meta: {
+        title: "Rentals"
+      }
     },
     {
       path: "/rentals/:id",
       name: "rentalsdetails",
-      component: RentalsDetails
+      component: RentalsDetails,
+      meta: {
+        title: "Rentals Details"
+      }
     },
     {
-      path: "/forsale",
-      name: "forsale",
-      component: ForSale
+      path: "/sales",
+      name: "sales",
+      component: Sales,
+      meta: {
+        title: "Sales"
+      }
     },
     {
-      path: "/forsale/:id",
-      name: "forsaledetails",
-      component: ForSaleDetails
+      path: "/sales/:id",
+      name: "salesdetails",
+      component: SalesDetails,
+      meta: {
+        title: "Sales Details"
+      }
     },
     {
       path: "/news/:id",
       name: "newsdetails",
-      component: NewsDetails
+      component: NewsDetails,
+      meta: {
+        title: "News Details"
+      }
     },
     {
       path: "/aboutus",
       name: "aboutus",
-      component: AboutUs
+      component: AboutUs,
+      meta: {
+        title: "About Us"
+      }
     },
     {
       path: "/contact",
       name: "contact",
-      component: Contact
+      component: Contact,
+      meta: {
+        title: "Contact"
+      }
     },
     {
       path: "/auth",
       name: "auth",
-      component: Auth
+      component: Auth,
+      meta: {
+        title: "Log In"
+      }
     },
     {
       path: "/admin",
       name: "admin",
-      component: Admin
+      component: Admin,
+      meta: {
+        title: "Admin Panel"
+      }
     },
     {
       path: "/admin/newpost",
       name: "newpost",
-      component: NewPost
+      component: NewPost,
+      meta: {
+        title: "Add New Post"
+      }
     },
     {
       path: "/admin/comments",
       name: "comments",
-      component: Comments
+      component: Comments,
+      meta: {
+        title: "Comments"
+      }
     },
     {
       path: '*',
-      component: ErrorComponent
+      component: ErrorComponent, 
+      meta: {
+        title: "Error"
+      }
     }
   ]
 });
@@ -118,6 +160,8 @@ router.beforeEach((to, from, next) => {
       next('/auth');
     }
   }
+
+  document.title = to.meta.title;
   next();
 });
 
