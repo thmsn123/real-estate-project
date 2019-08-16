@@ -9,7 +9,7 @@
 
 <script>
 import Filters from "../../components/Filters/Filters"
-import PostList from "../../components/Posts/PostList.vue";
+import PostList from "../../components/Posts/PostList";
 import { mapGetters } from "vuex";
 
 export default {

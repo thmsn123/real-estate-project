@@ -3,18 +3,11 @@
     <section class="post">
       <h1 class="post-title">{{ currentNews.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Written by {{ currentNews.username }}</div>
+        <img class="post-thumbnail" :src="currentNews.thumbnail">
       </div>
       <p class="post-content">{{ currentNews.content }}</p>
     </section>
-    <section class="post-feedback">
-      <p>
-        Let me know what you think about the post, send a mail to
-        <a
-          href="mailto:feedback@my-awesome-domain.com"
-        >feedback@my-awesome-domain.com</a>.
-      </p>
-    </section>
+    <div class="post-author">Written by {{ currentNews.username }}</div>
   </div>
 </template>
 
@@ -35,7 +28,7 @@ export default {
 <style scoped>
 .single-post-page {
   padding: 30px;
-  text-align: center;
+  text-align: justify;
   box-sizing: border-box;
 }
 
@@ -70,19 +63,14 @@ export default {
   }
 }
 
-.post-detail {
+.post-author {
   color: rgb(88, 88, 88);
   margin: 0 10px;
+  text-align: right;
 }
 
-.post-feedback a {
-  color: red;
-  text-decoration: none;
-}
-
-.post-feedback a:hover,
-.post-feedback a:active {
-  color: salmon;
+.post-thumbnail {
+  max-width: 600px;
 }
 </style>
 
