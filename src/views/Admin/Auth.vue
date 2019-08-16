@@ -35,11 +35,11 @@ export default {
       this.authenticateUser({
         email: this.email,
         password: this.password
-      }).then(response => {
-        if(typeof response === "undefined") {
+      }).then(statusCode => {
+        if(statusCode === 200) {
           this.$router.push("/admin");
-        } else {
-          this.errorMsg = response;
+        } else if (statusCode === 400) {
+          this.errorMsg = "Invalid email address!";
         }
       });
     }
