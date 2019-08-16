@@ -123,9 +123,11 @@ export default new Vuex.Store({
                     context.commit('setToken', result.data.idToken);
                     localStorage.setItem("token", result.data.idToken);
                     localStorage.setItem('tokenExpiration', new Date().getTime() + +result.data.expiresIn * 1000);
+
+                    return result.status;
                 })
                 .catch(error => {
-                    return error.message;
+                    return error.response.status;
                 });
         },
         initAuth(context) {
