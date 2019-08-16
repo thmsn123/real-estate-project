@@ -32,11 +32,16 @@ export default {
   methods: {
     ...mapActions(["authenticateUser"]),
     onSubmit() {
-      this.authenticateUser( {
+      this.authenticateUser({
         email: this.email,
         password: this.password
-      })
-      .then(()=> this.$router.push('/admin'))
+      }).then(response => {
+        if(typeof response === "undefined") {
+          this.$router.push("/admin");
+        } else {
+          console.log("login unsuccessful");
+        }
+      });
     }
   },
   validations: {
