@@ -1,6 +1,5 @@
 <template>
-  <div class="text-center">
-    <h1>This is About Us page!</h1>
+  <div class="mx-5 my-5 text-center">
     <p>
       Since many years Real Estate is engaged in the mediation of first-class properties on the northern Black Sea Coast with focus around Varna.
       In this time we won many happy clients, neighbours and friends. Many of the families, which have already bought their property through us, are still happy owner of their houses or apartments.

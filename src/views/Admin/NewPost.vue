@@ -1,16 +1,16 @@
 <template>
   <div>
-    <post-details @submit="onSubmitted"></post-details>
+    <post-form @submit="onSubmitted"></post-form>
   </div>
 </template>
 
 <script>
-import PostDetails from "../../components/Posts/PostDetails.vue";
+import PostForm from "../../components/Posts/PostForm";
 import { mapActions } from "vuex";
 
 export default {
   components: {
-    PostDetails
+    PostForm
   },
   methods: {
     ...mapActions(["addPost", "getPosts"]),

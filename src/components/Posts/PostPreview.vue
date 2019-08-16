@@ -1,6 +1,6 @@
-<template>
+Ф<template>
   <router-link :to="{name: this.postType + 'details', params: {id: this.id}}" class="post-preview">
-    <v-card class="mx-auto" max-width="400">
+    <v-card class="mx-auto" width="400" height="280">
       <v-img class="white--text" height="200px" :src="thumbnail"></v-img>
       <v-card-text>
         <span class="text--primary title">{{title}}</span>
