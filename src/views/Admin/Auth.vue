@@ -1,6 +1,7 @@
 <template>
   <div class="admin-auth-page">
     <div class="auth-container">
+      <div v-if="errorMsg">{{errorMsg}}<p></p></div>
       <form @submit.prevent="onSubmit">
         <div class="input-control">
           <label for="email">Email</label>
@@ -23,10 +24,9 @@ export default {
   layout: "admin",
   data() {
     return {
-      isLogin: true,
+      errorMsg: "",
       email: "",
-      password: "",
-      authToke: ""
+      password: ""
     };
   },
   methods: {
@@ -39,7 +39,7 @@ export default {
         if(typeof response === "undefined") {
           this.$router.push("/admin");
         } else {
-          console.log("login unsuccessful");
+          this.errorMsg = response;
         }
       });
     }
