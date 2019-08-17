@@ -1,8 +1,25 @@
 <template>
-  <div>
-    <ul v-for="(comment, index) in loadedComments" :key="index">
-      <li>{{comment.username}} - {{comment.email}} - {{comment.description}}</li>
-    </ul>
+  <div class="comments-wrapper">
+    <v-card max-width="800" class="mx-auto">
+      <v-toolbar color="cyan" dark>
+        <v-toolbar-title>Inbox</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn>
+          <v-icon>Refresh</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <v-list three-line>
+        <template v-for="(item, index) in loadedComments">
+          <v-subheader :key="index" v-html="item.email"></v-subheader>
+          <v-list-item :key="item.email">
+            <v-list-item-content>
+              <v-list-item-title v-html="item.username">{{item.email}}</v-list-item-title>
+              <v-list-item-subtitle v-html="item.description"></v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+      </v-list>
+    </v-card>
   </div>
 </template>
 
@@ -15,6 +32,8 @@ export default {
   }
 };
 </script>
-
 <style>
+.comments-wrapper {
+  margin: 20px;
+}
 </style>

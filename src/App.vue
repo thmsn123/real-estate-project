@@ -1,31 +1,62 @@
 <template>
   <div id="app">
-    <nav-bar></nav-bar>
-    <router-view class="view"/>
-    <nav-footer></nav-footer>
+    <header class="header">
+      <nav-bar></nav-bar>
+    </header>
+    <div id="main">
+      <router-view />
+      <article></article>
+      <sidebar class="sidebar"></sidebar>
+    </div>
+    <nav-footer class="nav-footer"></nav-footer>
   </div>
 </template>
 
 <script>
-import NavBar from './components/Navigation'
-import NavFooter from './components/Footer'
+import NavBar from "./components/Navigation";
+import NavFooter from "./components/Footer";
+import Sidebar from "./components/Sidebar";
 
 export default {
   components: {
     NavBar,
+    Sidebar,
     NavFooter
   },
   created() {
-    this.$store.dispatch('getPosts', 'news');
-    this.$store.dispatch('getPosts', 'sales');
-    this.$store.dispatch('getPosts', 'rentals');
-    this.$store.dispatch('getComments');
+    this.$store.dispatch("getPosts", "news");
+    this.$store.dispatch("getPosts", "sales");
+    this.$store.dispatch("getPosts", "rentals");
+    this.$store.dispatch("getComments");
   }
-}
+};
 </script>
 
 <style>
-  .view{
-    min-height: 500px;
-  }
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+#main {
+  display: flex;
+  min-height: calc(100vh - 54vh);
+}
+#main > article {
+  flex: 1;
+}
+#main > .sidebar {
+  flex: 0 0 20vw;
+  background: lightgrey;
+}
+#main > .sidebar {
+  order: -1;
+}
+.header {
+  height: 33.7vh;
+}
+.nav-footer div {
+  width: 100%;
+}
 </style>

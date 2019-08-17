@@ -4,10 +4,7 @@
       <b-img-lazy :src="backgroundImage" v-bind="imgProps" fluid-grow alt="Responsive image"></b-img-lazy>
     </div>
     <b-navbar toggleable="lg" type="light" variant="light">
-      <!-- <b-navbar-brand href="#">RealEstate</b-navbar-brand> -->
-
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
       <b-collapse id="nav-collapse" is-nav>
         <router-link class="nav-link" active-class="active" to="/">Home</router-link>
         <router-link class="nav-link" active-class="active" to="/news">News</router-link>

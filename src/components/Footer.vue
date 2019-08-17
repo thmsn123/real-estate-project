@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-footer dark padless>
-      <v-card flat tile class="footer indigo lighten-1 white--text text-left">
-        <v-card-text class="flex-container">
+      <v-card flat tile class=" indigo lighten-1 white--text text-left">
+        <v-card-text>
           <div>
             <router-link class="nav-link" active-class="active" to="/">Home</router-link>
             <router-link class="nav-link" active-class="active" to="/news">News</router-link>
@@ -48,14 +48,6 @@ export default {
 </script>
 
 <style scoped>
-.footer {
-  width: 100%;
-}
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 .footer-text {
   display: flex;
   justify-content: center;

@@ -1,7 +1,7 @@
 <template>
   <div class="admin-auth-page">
     <div class="auth-container">
-      <div v-if="errorMsg">{{errorMsg}}<p></p></div>
+      <div v-if="errorMsg" class="error-msg">{{errorMsg}}<p></p></div>
       <form @submit.prevent="onSubmit">
         <div class="input-control">
           <label for="email">Email</label>
@@ -9,7 +9,7 @@
           <label for="password">Password</label>
           <input type="password" v-model="$v.password.$model" value="password" id />
         </div>
-        <button value="Log in" :disabeld="$v.error">Log in</button>
+        <button value="Log in" :disabled="$v.$invalid" class="btn btn-primary">Log in</button>
       </form>
     </div>
   </div>
@@ -36,11 +36,11 @@ export default {
         email: this.email,
         password: this.password
       }).then(statusCode => {
-        if(statusCode === 200) {
+        if (statusCode === 200) {
           this.$router.push("/admin");
         } else if (statusCode === 400) {
-          this.errorMsg = "Invalid email address!";
-        }
+          this.errorMsg = "Invalid email address or password!";
+        } 
       });
     }
   },
@@ -96,19 +96,8 @@ export default {
   background-color: #eee;
   outline: none;
 }
-
-button {
-  font: inherit;
-  background-color: black;
-  color: white;
-  padding: 5px;
-  cursor: pointer;
-  border: 1px solid black;
-}
-
-button:hover,
-button:active {
-  background-color: rgb(51, 51, 51);
-  border: 1px solid black;
+.error-msg {
+  text-align: center;
+  color: red;
 }
 </style>

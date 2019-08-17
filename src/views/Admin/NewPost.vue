@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="form-container">
     <post-form @submit="onSubmitted"></post-form>
   </div>
 </template>
@@ -31,5 +31,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.form-container {
+  width: 100%;
+  padding: 10px;
+}
 </style>

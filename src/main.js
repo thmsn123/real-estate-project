@@ -11,11 +11,13 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuelidate);
 Vue.use(BootstrapVue);
+const vuetifyOptions = { }
 Vue.use(Vuetify);
 Vue.config.productionTip = false;
 
 new Vue({
     router,
     store,
+    vuetify: new Vuetify(vuetifyOptions),
     render: h => h(App)
 }).$mount("#app");
