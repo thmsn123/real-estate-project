@@ -13,6 +13,9 @@ Vue.use(Vuelidate);
 Vue.use(BootstrapVue);
 const vuetifyOptions = { }
 Vue.use(Vuetify);
+Vue.filter('toEuro', function (value) {
+    return `${value} €`;
+});
 Vue.config.productionTip = false;
 
 new Vue({

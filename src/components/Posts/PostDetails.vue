@@ -15,7 +15,7 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title>Price</v-list-item-title>
-              <v-list-item-subtitle>{{currentPost.price}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{currentPost.price | toEuro}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item two-line>

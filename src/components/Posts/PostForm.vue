@@ -33,11 +33,11 @@
             <label for="propertyType">Property type:</label>
             <select id="propertyType" v-model="propertyType" class="form-control">
               <option value="Studio">Studio</option>
-              <option value="One Bedroom">One bedroom apartment</option>
-              <option value="Two Bedrooms">Two bedrooms apartment</option>
-              <option value="Three Bedrooms">Three bedrooms apartment</option>
-              <option value="House">House/villa</option>
-              <option value="Rural">Rural property</option>
+              <option value="One bedroom apartment">One bedroom apartment</option>
+              <option value="Two bedrooms apartment">Two bedrooms apartment</option>
+              <option value="Three bedrooms apartment">Three bedrooms apartment</option>
+              <option value="House/villa">House/villa</option>
+              <option value="Rural property">Rural property</option>
             </select>
           </div>
           <div class="form-group" v-if="postType !== 'news'">

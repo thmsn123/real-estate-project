@@ -42,22 +42,47 @@ export default new Vuex.Store({
         }
     },
     mutations: {
-        setLoadedSales(state, loadedSales) {
+        SET_LOADED_SALES(state, loadedSales) {
             state.loadedSales = loadedSales;
         },
-        setLoadedRentals(state, loadedRentals) {
+        SET_LOADED_RENTALS(state, loadedRentals) {
             state.loadedRentals = loadedRentals;
         },
-        setLoadedNews(state, loadedNews) {
+        SET_LOADED_NEWS(state, loadedNews) {
             state.loadedNews = loadedNews;
         },
-        setLoadedComments(state, loadedComments) {
+        SET_LOADED_COMMENTS(state, loadedComments) {
             state.loadedComments = loadedComments;
         },
-        setToken(state, token) {
+        FILTER_DATA(state, data) {
+            if (data.filter === "type") {
+                if (data.page === "sales") {
+                    state.loadedSales = state.loadedSales.filter(
+                        item => item.propertyType.toLowerCase() === data.event.target.textContent.toLowerCase()
+                    )
+                } else {
+                    state.loadedRentals = state.loadedRentals.filter(
+                        item => item.propertyType.toLowerCase() === data.event.target.textContent.toLowerCase()
+                    )
+                }
+            } else if (data.filter === "price") {
+                console.log(data.event.target.textContent.split(" "));
+            } else {
+                if (data.page === "sales") {
+                state.loadedSales = state.loadedSales.filter(
+                    item => item.location.toLowerCase() === data.event.target.textContent.toLowerCase()
+                )
+                } else {
+                    state.loadedRentals = state.loadedRentals.filter(
+                        item => item.location.toLowerCase() === data.event.target.textContent.toLowerCase()
+                    )
+                }
+            }
+        },
+        SET_TOKEN(state, token) {
             state.authToken = token;
         },
-        clearToken(state) {
+        CLEAR_TOKEN(state) {
             state.authToken = null;
         }
     },
@@ -71,15 +96,15 @@ export default new Vuex.Store({
                         if (response.data[key].gallery) {
                             response.data[key].gallery = response.data[key].gallery.split(",");
                         }
-                        loadedPosts.push({...response.data[key], id: key });
+                        loadedPosts.push({ ...response.data[key], id: key});
                     }
 
                     if (postType === "news") {
-                        context.commit("setLoadedNews", loadedPosts);
+                        context.commit("SET_LOADED_NEWS", loadedPosts);
                     } else if (postType === "sales") {
-                        context.commit("setLoadedSales", loadedPosts);
+                        context.commit("SET_LOADED_SALES", loadedPosts);
                     } else {
-                        context.commit("setLoadedRentals", loadedPosts);
+                        context.commit("SET_LOADED_RENTALS", loadedPosts);
                     }
                 })
                 .catch(e => context.error(e));
@@ -89,10 +114,10 @@ export default new Vuex.Store({
                 .then(response => {
                     const loadedComments = [];
                     for (const key in response.data) {
-                        loadedComments.push({...response.data[key], id: key });
+                        loadedComments.push({ ...response.data[key], id: key });
                     }
 
-                    context.commit("setLoadedComments", loadedComments);
+                    context.commit("SET_LOADED_COMMENTS", loadedComments);
                 })
                 .catch(e => console.log(e));
         },
@@ -116,16 +141,16 @@ export default new Vuex.Store({
             let authUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDHidM-Bk0JA3eWcQ2M8iyXK4wqUWGHwmA";
 
             return axios.post(authUrl, {
-                    email: authData.email,
-                    password: authData.password,
-                    returnSecureToken: true
-                }).then(result => {
-                    context.commit('setToken', result.data.idToken);
-                    localStorage.setItem("token", result.data.idToken);
-                    localStorage.setItem('tokenExpiration', new Date().getTime() + +result.data.expiresIn * 1000);
+                email: authData.email,
+                password: authData.password,
+                returnSecureToken: true
+            }).then(result => {
+                context.commit('SET_TOKEN', result.data.idToken);
+                localStorage.setItem("token", result.data.idToken);
+                localStorage.setItem('tokenExpiration', new Date().getTime() + +result.data.expiresIn * 1000);
 
-                    return result.status;
-                })
+                return result.status;
+            })
                 .catch(error => {
                     return error.response.status;
                 });
@@ -135,7 +160,7 @@ export default new Vuex.Store({
             let expirationDate = localStorage.getItem("tokenExpiration");
 
             if (token) {
-                context.commit('setToken', token);
+                context.commit('SET_TOKEN', token);
             }
 
             if (expirationDate) {
@@ -146,7 +171,7 @@ export default new Vuex.Store({
             }
         },
         logOut(context) {
-            context.commit('clearToken');
+            context.commit('CLEAR_TOKEN');
             localStorage.removeItem("token");
             localStorage.removeItem("tokenExpiration");
         }

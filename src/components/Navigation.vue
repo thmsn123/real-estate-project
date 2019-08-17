@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="background-img">
       <b-img-lazy :src="backgroundImage" v-bind="imgProps" fluid-grow alt="Responsive image"></b-img-lazy>
     </div>
     <b-navbar toggleable="lg" type="light" variant="light">
@@ -49,5 +49,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.background-img {
+  overflow:hidden;
+  max-height: 30vh;
+}
 </style>

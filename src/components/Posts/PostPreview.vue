@@ -1,9 +1,10 @@
-Ф<template>
-  <router-link :to="{name: this.postType + 'details', params: {id: this.id}}" class="post-preview">
+<template>
+  <router-link :to="{name: loadedPost.postType + 'details', params: {id: loadedPost.id}}" class="post-preview">
     <v-card class="mx-auto" width="400" height="280">
-      <v-img class="white--text" height="200px" :src="thumbnail"></v-img>
+      <v-img class="white--text" height="200px" :src="loadedPost.thumbnail"></v-img>
       <v-card-text>
-        <span class="text--primary title">{{title}}</span>
+        <span class="text--primary title">{{loadedPost.title}}</span>
+        <div v-if="loadedPost.price" class="text--secondary">{{loadedPost.price | toEuro}} | {{loadedPost.location}} | {{loadedPost.propertyType}}</div>
       </v-card-text>
     </v-card>
   </router-link>
@@ -13,24 +14,8 @@
 export default {
   name: "PostPreview",
   props: {
-    id: {
-      type: String,
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    preview: {
-      type: String,
-      required: true
-    },
-    thumbnail: {
-      type: String,
-      required: true
-    },
-    postType: {
-      type: String,
+    loadedPost: {
+      type: Object,
       required: true
     }
   }
@@ -44,6 +29,9 @@ export default {
 }
 a:hover {
   text-decoration: none;
+}
+.title{
+  font-weight: bold;
 }
 .title:hover {
   color: black;
