@@ -1,5 +1,4 @@
 <template>
-  <div class="container">
     <form @submit.prevent="onSave">
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -9,16 +8,18 @@
               type="text"
               v-model.trim="$v.username.$model"
               value="user-name"
-              class="form-control"
+              :class="['form-control', {'alert-danger' : $v.username.$error}]"
             />
+            <p class="alert alert-danger" v-if="$v.username.$error">Name is not valid!</p>
           </div>
           <div class="form-group">
             <label for="postType">Post type:</label>
-            <select id="postType" v-model="$v.postType.$model" class="form-control">
+            <select id="postType" v-model="$v.postType.$model" :class="['form-control', {'alert-danger' : $v.postType.$error}]">
               <option value="news">News post</option>
               <option value="sales">Sale post</option>
               <option value="rentals">Rentals post</option>
             </select>
+            <p class="alert alert-danger" v-if="$v.postType.$error">Please choose an option!</p>
           </div>
           <div class="form-group">
             <label for="title">Title:</label>
@@ -98,7 +99,6 @@
         </div>
       </div>
     </form>
-  </div>
 </template>
 
 <script>
