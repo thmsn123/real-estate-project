@@ -11,12 +11,9 @@
     >
       <div class="popper">
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
-          <div class="popper-content" @click="filterByType">Studio</div>
-          <div class="popper-content" @click="filterByType">One bedroom apartment</div>
-          <div class="popper-content" @click="filterByType">Two bedroom apartment</div>
-          <div class="popper-content" @click="filterByType">Three bedroom apartment</div>
-          <div class="popper-content" @click="filterByType">House/villa</div>
-          <div class="popper-content" @click="filterByType">Rural property</div>
+          <div v-for="(item, index) in types" :key="index">
+            <div class="popper-content" @click="filterData($event, 'type')">{{item}}</div>
+          </div>
         </v-btn-toggle>
       </div>
       <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Type</v-btn>
@@ -31,10 +28,9 @@
     >
       <div class="popper">
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
-          <div class="popper-content" @click="filterByPrice">to 20000</div>
-          <div class="popper-content" @click="filterByPrice">from 20000 to 50000</div>
-          <div class="popper-content" @click="filterByPrice">from 50000 to 100000</div>
-          <div class="popper-content" @click="filterByPrice">over 10000</div>
+          <div v-for="(item, index) in priceRanges" :key="index">
+            <div class="popper-content" @click="filterData($event, 'price')">{{item | toEuro}}</div>
+          </div>
         </v-btn-toggle>
       </div>
       <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Price</v-btn>
@@ -49,12 +45,9 @@
     >
       <div class="popper">
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
-          <div class="popper-content" @click="filterByLocation">Kavarna</div>
-          <div class="popper-content" @click="filterByLocation">Balchik</div>
-          <div class="popper-content" @click="filterByLocation">Bulgarevo</div>
-          <div class="popper-content" @click="filterByLocation">Mogilishte</div>
-          <div class="popper-content" @click="filterByLocation">Kamen Bryag</div>
-          <div class="popper-content" @click="filterByLocation">Tyulenovo</div>
+          <div v-for="(item, index) in locations" :key="index">
+            <div class="popper-content" @click="filterData($event, 'location')">{{item}}</div>
+          </div>
         </v-btn-toggle>
       </div>
       <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Location</v-btn>
@@ -69,9 +62,9 @@
     >
       <div class="popper">
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
-          <div class="popper-content">Price</div>
-          <div class="popper-content">Distance</div>
-          <div class="popper-content">Newest</div>
+          <div v-for="(item, index) in sortOptions" :key="index">
+            <div class="popper-content">{{item}}</div>
+          </div>
         </v-btn-toggle>
       </div>
       <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Sort</v-btn>
@@ -82,23 +75,51 @@
 <script>
 import Popper from "vue-popperjs";
 import "vue-popperjs/dist/vue-popper.css";
+import { mapMutations } from "vuex";
 
 export default {
   name: "Filters",
+  props: {
+    loadedPosts: {
+      type: Array,
+      required: true
+    }
+  },
+  data() {
+    return {
+      types: [
+        "One bedrooms apartment",
+        "Two bedrooms apartment",
+        "Three bedrooms apartment",
+        "House/villa",
+        "Rural property"
+      ],
+      locations: [
+        "Kavarna",
+        "Balchik",
+        "Bulgarevo",
+        "Mogilishte",
+        "Kamen Bryag",
+        "Tyulenovo"
+      ],
+      priceRanges: [
+        "to 20000",
+        "from 20000 to 50000",
+        "from 50000 to 100000",
+        "over 10000"
+      ],
+      sortOptions: ["Price", "Distance", "Date"]
+    };
+  },
   components: {
     popper: Popper
   },
   methods: {
-    filterByPrice(e) {
-      console.log('ttt');
-      this.$store.getters.loadedRentals.filter(item => item.price < 40000)
+    ...mapMutations(["FILTER_DATA"]),
+    filterData(e, filterItem) {
+      this.FILTER_DATA({ event: e, filter: filterItem, page: this.$router.currentRoute.name });
     },
-    filterByType(e) {
-      console.log(e);
-    },
-    filterByLocation(e) {
-      console.log(e);
-    }
+    sortData(e) {}
   }
 };
 </script>

@@ -1,6 +1,5 @@
 <template>
   <div class="text-center">
-    <filters></filters>
     <div class="posts">
       <post-list :loadedPosts="loadedSales"></post-list>
     </div>
@@ -8,14 +7,12 @@
 </template>
 
 <script>
-import Filters from "../../components/Filters/Filters"
 import PostList from "../../components/Posts/PostList";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    PostList,
-    Filters
+    PostList
   },
   computed: {
     ...mapGetters(["loadedSales"])

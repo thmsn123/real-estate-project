@@ -1,30 +1,35 @@
 <template>
-  <section class="post-list">
-    <post-preview
-      v-for="post in loadedPosts"
-      :key="post.id"
-      :id="post.id"
-      :thumbnail="post.thumbnail"
-      :title="post.title"
-      :preview="post.preview"
-      :postType="post.postType"
-    >
-    </post-preview>
-  </section>
+  <div>
+    <filters :loadedPosts="loadedPosts" @filtered-data="filterData"></filters>
+    <section class="post-list">
+      <post-preview
+        v-for="(post, index) in loadedPosts"
+        :key="post.id"
+        :loadedPost="loadedPosts[index]"
+      ></post-preview>
+    </section>
+  </div>
 </template>
 
 <script>
-import PostPreview from './PostPreview'
+import Filters from "../../components/Filters/Filters";
+import PostPreview from "./PostPreview";
 
 export default {
   name: "PostList",
   components: {
-      PostPreview
+    PostPreview,
+    Filters
   },
   props: {
     loadedPosts: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    filterData(param) {
+      this.loadedPosts = param;
     }
   }
 };

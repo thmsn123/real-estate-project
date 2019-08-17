@@ -5,7 +5,6 @@
     </header>
     <div id="main">
       <router-view />
-      <article></article>
       <sidebar class="sidebar"></sidebar>
     </div>
     <nav-footer class="nav-footer"></nav-footer>
@@ -41,10 +40,7 @@ body {
 }
 #main {
   display: flex;
-  min-height: calc(100vh - 54vh);
-}
-#main > article {
-  flex: 1;
+  min-height: calc(100vh - 45vh);
 }
 #main > .sidebar {
   flex: 0 0 20vw;
@@ -52,9 +48,6 @@ body {
 }
 #main > .sidebar {
   order: -1;
-}
-.header {
-  height: 33.7vh;
 }
 .nav-footer div {
   width: 100%;
