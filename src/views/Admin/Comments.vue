@@ -1,5 +1,5 @@
 <template>
-  <div class="comments-wrapper">
+  <div class="container my-3">
     <v-card max-width="800" class="mx-auto">
       <v-toolbar color="cyan" dark>
         <v-toolbar-title>Inbox</v-toolbar-title>
@@ -17,6 +17,7 @@
               <v-list-item-subtitle v-html="item.description"></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
+          <v-divider :key="item.username"></v-divider>
         </template>
       </v-list>
     </v-card>
@@ -31,15 +32,10 @@ export default {
     ...mapGetters(["loadedComments"])
   },
   methods: {
-    ...mapActions(['getComments']),
-    getLatestComments(){
+    ...mapActions(["getComments"]),
+    getLatestComments() {
       this.getComments();
     }
   }
 };
 </script>
-<style>
-.comments-wrapper {
-  margin: 20px;
-}
-</style>

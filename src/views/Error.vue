@@ -1,5 +1,5 @@
 <template>
-  <div class="error-page">
+  <div class="error-page container">
     <h1>Oops, something went wrong!</h1>
     <p>
       Back to

@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-auth-page">
+  <div class="admin-auth-page container my-3">
     <div class="auth-container">
       <div v-if="errorMsg" class="error-msg">{{errorMsg}}<p></p></div>
       <form @submit.prevent="onSubmit">

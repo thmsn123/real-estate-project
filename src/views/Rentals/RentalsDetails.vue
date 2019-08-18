@@ -1,5 +1,5 @@
 <template>
-  <div class="single-post-page" v-if="currentRental">
+  <div class="single-post-page container" v-if="currentRental">
     <post-details :currentPost="currentRental"></post-details>
   </div>
 </template>
@@ -25,7 +25,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 .single-post-page {

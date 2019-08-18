@@ -1,7 +1,30 @@
-<template> 
-    <div class="mx-5 my-5 text-center">
-      <h3>Welcome to Real Estate properties in Bulgaria!</h3>
-      <p>The company is a developer of more than 55 000 sq.m. of building area at the Black sea coast of Bulgaria in the region of Sunny beach resort, including holiday complexes Rainbow 1 (2005), Rainbow 2 (2008), Rainbow 3 Resort Club(2009), Sea Isle (Rainbow 4 - 2010); the exclusive VIP first line aparthotel GOLDEN RAINBOW VIP Residence (2011), the amazing year-round Mediterranean-style complex Romance Marine (2013). We keep on developing year-round complexes: Messembria Palace, Messembria Resort, Riviera Garden.</p>
-      <router-link class="btn btn-primary" :to="{path: '/aboutus'}">Read More</router-link>
+<template>
+  <div class="mx-5 my-5 text-center container">
+    <h3>Welcome to Kavarna Real Estate Properties!</h3>
+    <p>Here you can find a variety of apartment, houses, villas, properties and etc. for rent and sale.</p>
+    <p>Please feel free to contact us!</p>
+    <router-link class="btn btn-primary" :to="{path: '/aboutus'}">Read More</router-link>
+    <div>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/AfpAnvO-ons"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
+  </div>
 </template>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.btn {
+  width: 120px;
+  margin: 0 auto 20px auto;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="single-post-page" v-if="currentNews">
+  <div class="single-post-page container" v-if="currentNews">
     <section class="post">
       <h1 class="post-title">{{ currentNews.title }}</h1>
       <div class="post-details">
@@ -65,7 +65,7 @@ export default {
 
 .post-author {
   color: rgb(88, 88, 88);
-  margin: 0 10px;
+  margin: 0 300px;
   text-align: right;
 }
 

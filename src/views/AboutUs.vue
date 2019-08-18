@@ -1,19 +1,25 @@
 <template>
-  <div class="mx-5 my-5 text-center">
-    <p>
-      Since many years Real Estate is engaged in the mediation of first-class properties on the northern Black Sea Coast with focus around Varna.
-      In this time we won many happy clients, neighbours and friends. Many of the families, which have already bought their property through us, are still happy owner of their houses or apartments.
-      From simple country house, through vacation properties, to luxury villas for high requirements – we accompany you on the way to your dream property.
-      Absolute reliability, best prices and individual support – completely orientated to the needs and requirements of foreigners on property hunt in Bulgaria.
-      We would be happy to welcome you in our office.
-    </p>
+  <div class="container">
+    <carousel class="carousel"></carousel>
+    <div class="mx-5 my-5 text-center">
+      <p>The company was found in 2019 in Kavarna. With us you can find the most affordable houses and holiday complexes near the sea or in the nearby villages.</p>
+      <p>Whether you are selling or buying, renting or renting real estate, registering a company, our office in Kavarna will arrange everything necessary for the successful completion of your desired transaction - preliminary inspection of the property, organization of inspections and transportation to each settlement in Bulgaria, consulting for determining the sale or rental price, project and investment consulting, property management, asserting and protecting your interests, support in providing all the necessary documents, lawyer nomic and credit counseling and more.</p>
+      <p>Our goal is to offer our clients the most suitable properties on the market at the time of their offering.</p>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import Carousel from "../components/Carousel";
+export default {
+  components: {
+    Carousel
+  }
+};
 </script>
 
-<style>
+<style scoped>
+.carousel {
+  margin: 1rem 0 !important;
+}
 </style>
-
