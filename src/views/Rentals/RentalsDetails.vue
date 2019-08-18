@@ -1,5 +1,5 @@
 <template>
-  <div class="single-post-page container" v-if="currentRental">
+  <div class="single-post-page container my-3" v-if="currentRental">
     <post-details :currentPost="currentRental"></post-details>
   </div>
 </template>

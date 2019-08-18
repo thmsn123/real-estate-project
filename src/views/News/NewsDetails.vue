@@ -1,5 +1,5 @@
 <template>
-  <div class="single-post-page container" v-if="currentNews">
+  <div class="single-post-page container my-3" v-if="currentNews">
     <section class="post">
       <h1 class="post-title">{{ currentNews.title }}</h1>
       <div class="post-details">
