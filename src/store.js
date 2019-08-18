@@ -66,12 +66,48 @@ export default new Vuex.Store({
                     )
                 }
             } else if (data.filter === "price") {
-                console.log(data.event.target.textContent.split(" "));
+                if (data.page === "sales") {
+                    if (data.event.target.textContent.toLowerCase() === "to 20000 €") {
+                        state.loadedSales = state.loadedSales.filter(
+                            item => item.price <= 20000
+                        )
+                    } else if (data.event.target.textContent.toLowerCase() === "from 20000 to 50000 €") {
+                        state.loadedSales = state.loadedSales.filter(
+                            item => item.price >= 20000 && item.price <= 50000
+                        )
+                    } else if (data.event.target.textContent.toLowerCase() === "from 50000 to 100000 €") {
+                        state.loadedSales = state.loadedSales.filter(
+                            item => item.price >= 50000 && item.price <= 100000
+                        )
+                    } else {
+                        state.loadedSales = state.loadedSales.filter(
+                            item => item.price >= 100000
+                        )
+                    }
+                } else {
+                    if (data.event.target.textContent.toLowerCase() === "to 500 €") {
+                        state.loadedRentals = state.loadedRentals.filter(
+                            item => item.price <= 500
+                        )
+                    } else if (data.event.target.textContent.toLowerCase() === "from 100 to 500 €") {
+                        state.loadedRentals = state.loadedRentals.filter(
+                            item => item.price >= 100 && item.price <= 500
+                        )
+                    } else if (data.event.target.textContent.toLowerCase() === "from 500 to 1000 €") {
+                        state.loadedRentals = state.loadedRentals.filter(
+                            item => item.price >= 500 && item.price <= 1000
+                        )
+                    } else {
+                        state.loadedRentals = state.loadedRentals.filter(
+                            item => item.price >= 1000
+                        )
+                    }
+                }
             } else {
                 if (data.page === "sales") {
-                state.loadedSales = state.loadedSales.filter(
-                    item => item.location.toLowerCase() === data.event.target.textContent.toLowerCase()
-                )
+                    state.loadedSales = state.loadedSales.filter(
+                        item => item.location.toLowerCase() === data.event.target.textContent.toLowerCase()
+                    )
                 } else {
                     state.loadedRentals = state.loadedRentals.filter(
                         item => item.location.toLowerCase() === data.event.target.textContent.toLowerCase()
@@ -96,7 +132,7 @@ export default new Vuex.Store({
                         if (response.data[key].gallery) {
                             response.data[key].gallery = response.data[key].gallery.split(",");
                         }
-                        loadedPosts.push({ ...response.data[key], id: key});
+                        loadedPosts.push({ ...response.data[key], id: key });
                     }
 
                     if (postType === "news") {
@@ -171,6 +207,7 @@ export default new Vuex.Store({
             }
         },
         logOut(context) {
+            alert('Logged out!');
             context.commit('CLEAR_TOKEN');
             localStorage.removeItem("token");
             localStorage.removeItem("tokenExpiration");
