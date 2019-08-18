@@ -5,7 +5,7 @@
         <v-toolbar-title>Inbox</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn>
-          <v-icon>Refresh</v-icon>
+          <v-icon @click="getLatestComments">Refresh</v-icon>
         </v-btn>
       </v-toolbar>
       <v-list three-line>
@@ -24,11 +24,17 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
     ...mapGetters(["loadedComments"])
+  },
+  methods: {
+    ...mapActions(['getComments']),
+    getLatestComments(){
+      this.getComments();
+    }
   }
 };
 </script>

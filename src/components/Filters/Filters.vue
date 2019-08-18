@@ -19,6 +19,7 @@
       <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Type</v-btn>
     </popper>
     <popper
+      v-if="this.$router.currentRoute.name === 'sales'"
       class="popperWrapper"
       trigger="click"
       :options="{
@@ -28,7 +29,25 @@
     >
       <div class="popper">
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
-          <div v-for="(item, index) in priceRanges" :key="index">
+          <div v-for="(item, index) in salesPriceRanges" :key="index">
+            <div class="popper-content" @click="filterData($event, 'price')">{{item | toEuro}}</div>
+          </div>
+        </v-btn-toggle>
+      </div>
+      <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Price</v-btn>
+    </popper>
+    <popper
+      v-else
+      class="popperWrapper"
+      trigger="click"
+      :options="{
+          placement: 'bottom-start',
+          modifiers: { offset: { offset: '0, 5px' } }
+        }"
+    >
+      <div class="popper">
+        <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
+          <div v-for="(item, index) in rentalsPriceRanges" :key="index">
             <div class="popper-content" @click="filterData($event, 'price')">{{item | toEuro}}</div>
           </div>
         </v-btn-toggle>
@@ -52,30 +71,17 @@
       </div>
       <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Location</v-btn>
     </popper>
-    <popper
-      class="popperWrapper"
-      trigger="click"
-      :options="{
-          placement: 'bottom-start',
-          modifiers: { offset: { offset: '0, 5px' } }
-        }"
-    >
-      <div class="popper">
-        <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
-          <div v-for="(item, index) in sortOptions" :key="index">
-            <div class="popper-content">{{item}}</div>
-          </div>
-        </v-btn-toggle>
-      </div>
-      <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Sort</v-btn>
-    </popper>
+    <div>
+      <span></span>
+      <v-btn small class="whiteTextBtn sortersBtn" text slot="reference" @click="clearFilter">X</v-btn>
+    </div>
   </div>
 </template>
 
 <script>
 import Popper from "vue-popperjs";
 import "vue-popperjs/dist/vue-popper.css";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "Filters",
@@ -102,11 +108,17 @@ export default {
         "Kamen Bryag",
         "Tyulenovo"
       ],
-      priceRanges: [
+      salesPriceRanges: [
         "to 20000",
         "from 20000 to 50000",
         "from 50000 to 100000",
         "over 10000"
+      ],
+      rentalsPriceRanges: [
+        "to 100",
+        "from 100 to 500",
+        "from 500 to 1000",
+        "over 1000"
       ],
       sortOptions: ["Price", "Distance", "Date"]
     };
@@ -116,10 +128,23 @@ export default {
   },
   methods: {
     ...mapMutations(["FILTER_DATA"]),
+    ...mapActions(["getPosts"]),
     filterData(e, filterItem) {
-      this.FILTER_DATA({ event: e, filter: filterItem, page: this.$router.currentRoute.name });
+      this.FILTER_DATA({
+        event: e,
+        filter: filterItem,
+        page: this.$router.currentRoute.name
+      });
     },
-    sortData(e) {}
+    clearFilter(e) {
+      if (this.$router.currentRoute.name === "news") {
+        this.getPosts("news");
+      } else if (this.$router.currentRoute.name === "sales") {
+        this.getPosts("sales");
+      } else {
+        this.getPosts("rentals");
+      }
+    }
   }
 };
 </script>
