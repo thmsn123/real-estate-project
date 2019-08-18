@@ -207,7 +207,6 @@ export default new Vuex.Store({
             }
         },
         logOut(context) {
-            alert('Logged out!');
             context.commit('CLEAR_TOKEN');
             localStorage.removeItem("token");
             localStorage.removeItem("tokenExpiration");

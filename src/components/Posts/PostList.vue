@@ -1,6 +1,6 @@
 <template>
   <div>
-    <filters :loadedPosts="loadedPosts" @filtered-data="filterData"></filters>
+    <filters v-if="this.$router.currentRoute.name !== 'news'" :loadedPosts="loadedPosts" @filtered-data="filterData"></filters>
     <section class="post-list">
       <post-preview
         v-for="(post, index) in loadedPosts"

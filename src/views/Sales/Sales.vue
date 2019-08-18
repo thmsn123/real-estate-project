@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center my-3">
     <div class="posts">
       <post-list :loadedPosts="loadedSales"></post-list>
     </div>

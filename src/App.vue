@@ -37,14 +37,15 @@ export default {
 }
 body {
   margin: 0;
+  font-family: 'Roboto', sans-serif !important;
 }
 #main {
   display: flex;
-  min-height: calc(100vh - 45vh);
+  min-height: calc(100vh - 40vh);
 }
 #main > .sidebar {
-  flex: 0 0 20vw;
-  background: lightgrey;
+  flex: 0 0 9vw;
+  background-color: #f8f9fa !important;
 }
 #main > .sidebar {
   order: -1;

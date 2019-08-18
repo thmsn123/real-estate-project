@@ -12,7 +12,10 @@
       <div class="popper">
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
           <div v-for="(item, index) in types" :key="index">
-            <div class="popper-content" @click="filterData($event, 'type')">{{item}}</div>
+            <div
+              :class="['popper-content', 'sort-popper-content', {'popper-content-selected': selectedFilterProp === item ? true:false}]"
+              @click="filterData($event, 'type')"
+            >{{item}}</div>
           </div>
         </v-btn-toggle>
       </div>
@@ -30,7 +33,10 @@
       <div class="popper">
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
           <div v-for="(item, index) in salesPriceRanges" :key="index">
-            <div class="popper-content" @click="filterData($event, 'price')">{{item | toEuro}}</div>
+            <div
+              :class="['popper-content', 'sort-popper-content', {'popper-content-selected': selectedFilterProp === item ? true:false}]"
+              @click="filterData($event, 'price')"
+            >{{item | toEuro}}</div>
           </div>
         </v-btn-toggle>
       </div>
@@ -48,7 +54,10 @@
       <div class="popper">
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
           <div v-for="(item, index) in rentalsPriceRanges" :key="index">
-            <div class="popper-content" @click="filterData($event, 'price')">{{item | toEuro}}</div>
+            <div
+              :class="['popper-content', 'sort-popper-content', {'popper-content-selected': selectedFilterProp === item ? true:false}]"
+              @click="filterData($event, 'price')"
+            >{{item | toEuro}}</div>
           </div>
         </v-btn-toggle>
       </div>
@@ -65,7 +74,10 @@
       <div class="popper">
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
           <div v-for="(item, index) in locations" :key="index">
-            <div class="popper-content" @click="filterData($event, 'location')">{{item}}</div>
+            <div
+              :class="['popper-content', 'sort-popper-content', {'popper-content-selected': selectedFilterProp === item ? true:false}]"
+              @click="filterData($event, 'location')"
+            >{{item}}</div>
           </div>
         </v-btn-toggle>
       </div>
@@ -120,7 +132,8 @@ export default {
         "from 500 to 1000",
         "over 1000"
       ],
-      sortOptions: ["Price", "Distance", "Date"]
+      sortOptions: ["Price", "Distance", "Date"],
+      selectedFilterProp: ""
     };
   },
   components: {
@@ -130,6 +143,7 @@ export default {
     ...mapMutations(["FILTER_DATA"]),
     ...mapActions(["getPosts"]),
     filterData(e, filterItem) {
+      this.selectedFilterProp = e.target.textContent;
       this.FILTER_DATA({
         event: e,
         filter: filterItem,
@@ -137,9 +151,7 @@ export default {
       });
     },
     clearFilter(e) {
-      if (this.$router.currentRoute.name === "news") {
-        this.getPosts("news");
-      } else if (this.$router.currentRoute.name === "sales") {
+      if (this.$router.currentRoute.name === "sales") {
         this.getPosts("sales");
       } else {
         this.getPosts("rentals");
@@ -179,7 +191,6 @@ export default {
   color: #3a3a3a;
   top: -0.07143rem;
 }
-#popper-content-selected,
 .popper-content-selected {
   background: #f4f4f4ad;
   font-weight: bold;
@@ -192,6 +203,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
 }
 .popper-content:hover {
   background: #f3f3f3;
