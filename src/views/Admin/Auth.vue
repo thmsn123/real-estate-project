@@ -1,13 +1,30 @@
 <template>
   <div class="admin-auth-page container my-3">
     <div class="auth-container">
-      <div v-if="errorMsg" class="error-msg">{{errorMsg}}<p></p></div>
+      <div v-if="errorMsg" class="error-msg">
+        {{errorMsg}}
+        <p></p>
+      </div>
       <form @submit.prevent="onSubmit">
         <div class="input-control">
           <label for="email">Email</label>
-          <input type="text" v-model="$v.email.$model" value="email" id="email" />
+          <input
+            type="text"
+            v-model="$v.email.$model"
+            :class="{'alert-danger' : $v.email.$error}"
+            value="email"
+            id="email"
+          />
+          <p class="alert alert-danger" v-if="$v.email.$error">Email is not valid!</p>
           <label for="password">Password</label>
-          <input type="password" v-model="$v.password.$model" value="password" id />
+          <input
+            type="password"
+            v-model="$v.password.$model"
+            :class="{'alert-danger' : $v.password.$error}"
+            value="password"
+            id
+          />
+          <p class="alert alert-danger" v-if="$v.password.$error">Password is not valid!</p>
         </div>
         <button value="Log in" :disabled="$v.$invalid" class="btn btn-primary">Log in</button>
       </form>
@@ -40,7 +57,7 @@ export default {
           this.$router.push("/admin");
         } else if (statusCode === 400) {
           this.errorMsg = "Invalid email address or password!";
-        } 
+        }
       });
     }
   },
