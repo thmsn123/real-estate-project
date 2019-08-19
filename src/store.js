@@ -1,13 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import config from "../src/config"
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         authToken: null,
+        admin: null,
         singlePost: [],
+        singleComment: [],
         loadedSales: [],
         loadedRentals: [],
         loadedComments: [],
@@ -25,6 +28,9 @@ export default new Vuex.Store({
 
             return state.singlePost;
         },
+        currentComment: state => commentId => {
+            return state.singleComment = state.loadedComments.find(x => x.id === commentId);
+        },
         loadedSales(state) {
             return state.loadedSales;
         },
@@ -39,6 +45,9 @@ export default new Vuex.Store({
         },
         isAuthenticated(state) {
             return state.authToken != null;
+        },
+        isAdmin(state) {
+            return state.admin != null && state.admin === 'JsqK1ja6uaQaVWcGvYkRBStvpIv1';
         }
     },
     mutations: {
@@ -118,14 +127,20 @@ export default new Vuex.Store({
         SET_TOKEN(state, token) {
             state.authToken = token;
         },
+        SET_ADMIN_STATUS(state, localID) {
+            //hardcode admin id;
+            state.admin = localID;
+        },
         CLEAR_TOKEN(state) {
             state.authToken = null;
+        },
+        CLEAR_ADMIN_STATUS(state) {
+            state.admin = null;
         }
     },
     actions: {
         getPosts(context, postType) {
-
-            return axios.get("https://real-estate-project-e32ed.firebaseio.com/" + postType + ".json")
+            return axios.get(config.fbConfig.dbURL + postType + ".json")
                 .then(response => {
                     const loadedPosts = [];
                     for (const key in response.data) {
@@ -146,7 +161,7 @@ export default new Vuex.Store({
                 .catch(e => context.error(e));
         },
         getComments(context) {
-            return axios.get("https://real-estate-project-e32ed.firebaseio.com/comments.json")
+            return axios.get(config.fbConfig.dbURL + "/comments.json")
                 .then(response => {
                     const loadedComments = [];
                     for (const key in response.data) {
@@ -159,7 +174,7 @@ export default new Vuex.Store({
         },
         addPost(context, post) {
             return axios
-                .post("https://real-estate-project-e32ed.firebaseio.com/" + post.postType + ".json?auth=" + context.state.authToken, post)
+                .post(config.fbConfig.dbURL + post.postType + ".json?auth=" + context.state.authToken, post)
                 .then(result => {
                     console.log(result);
                 })
@@ -167,22 +182,29 @@ export default new Vuex.Store({
         },
         addComment(context, post) {
             return axios
-                .post("https://real-estate-project-e32ed.firebaseio.com/comments.json", post)
+                .post(config.fbConfig.dbURL + "comments.json?auth=" + context.state.authToken, post)
                 .then(result => {
                     console.log(result);
                 })
                 .catch(e => console.log(e));
         },
         authenticateUser(context, authData) {
-            let authUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDHidM-Bk0JA3eWcQ2M8iyXK4wqUWGHwmA";
+            let authUrl = config.fbConfig.authDomain + "verifyPassword?key=" + config.fbConfig.apiIKey;
+
+            if (!authData.isLogin) {
+                authUrl = config.fbConfig.authDomain + "signupNewUser?key=" + config.fbConfig.apiIKey;
+            }
 
             return axios.post(authUrl, {
                 email: authData.email,
                 password: authData.password,
                 returnSecureToken: true
             }).then(result => {
+                console.log(result)
                 context.commit('SET_TOKEN', result.data.idToken);
+                context.commit('SET_ADMIN_STATUS', result.data.localId);
                 localStorage.setItem("token", result.data.idToken);
+                localStorage.setItem("localId", result.data.localId);
                 localStorage.setItem('tokenExpiration', new Date().getTime() + +result.data.expiresIn * 1000);
 
                 return result.status;
@@ -193,10 +215,14 @@ export default new Vuex.Store({
         },
         initAuth(context) {
             let token = localStorage.getItem('token');
+            let localId = localStorage.getItem('localId');
             let expirationDate = localStorage.getItem("tokenExpiration");
 
             if (token) {
                 context.commit('SET_TOKEN', token);
+            }
+            if (localId) {
+                context.commit('SET_ADMIN_STATUS', localId);
             }
 
             if (expirationDate) {
@@ -208,7 +234,9 @@ export default new Vuex.Store({
         },
         logOut(context) {
             context.commit('CLEAR_TOKEN');
+            context.commit('CLEAR_ADMIN_STATUS');
             localStorage.removeItem("token");
+            localStorage.removeItem("localId");
             localStorage.removeItem("tokenExpiration");
         }
     }

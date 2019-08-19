@@ -10,14 +10,21 @@
       </v-toolbar>
       <v-list three-line>
         <template v-for="(item, index) in loadedComments">
-          <v-subheader :key="index" v-html="item.email"></v-subheader>
-          <v-list-item :key="item.email">
-            <v-list-item-content>
-              <v-list-item-title v-html="item.username">{{item.email}}</v-list-item-title>
-              <v-list-item-subtitle v-html="item.description"></v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-          <v-divider :key="item.username"></v-divider>
+          <router-link
+            :key="index"
+            class="nav-link"
+            active-class="active"
+            :to="{name: 'commentsdetails', params: {id: item.id}}"
+          >
+            <v-subheader :key="index" v-html="item.email"></v-subheader>
+            <v-list-item :key="item.email">
+              <v-list-item-content>
+                <v-list-item-title v-html="item.username">{{item.email}}</v-list-item-title>
+                <v-list-item-subtitle v-html="item.description"></v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <v-divider :key="item.id"></v-divider>
+          </router-link>
         </template>
       </v-list>
     </v-card>

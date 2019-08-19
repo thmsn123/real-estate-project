@@ -12,7 +12,8 @@ import Contact from "./views/Contact";
 import Auth from "./views/Admin/Auth"
 import Admin from "./views/Admin/AdminPanel"
 import NewPost from "./views/Admin/NewPost"
-import Comments from './views/Admin/Comments'
+import Comments from './views/Admin/Comments/Comments'
+import CommentsDetails from './views/Admin/Comments/CommentsDetails'
 import ErrorComponent from "./views/Error"
 import store from "../src/store.js"
 
@@ -127,8 +128,16 @@ const router = new Router({
       }
     },
     {
+      path: "/admin/comments/:id",
+      name: "commentsdetails",
+      component: CommentsDetails,
+      meta: {
+        title: "Comments Details"
+      }
+    },
+    {
       path: '*',
-      component: ErrorComponent, 
+      component: ErrorComponent,
       meta: {
         title: "Error"
       }
@@ -145,22 +154,31 @@ router.beforeEach((to, from, next) => {
       next('/');
     }
   }
-  if (to.fullPath === '/admin') {
+  if (to.fullPath === '/contact') {
     if (!store.getters.isAuthenticated) {
+      next('/');
+    }
+  }
+  if (to.fullPath === '/admin') {
+    if (!store.getters.isAuthenticated || (store.getters.isAuthenticated && !store.getters.isAdmin)) {
       next('/auth');
     }
   }
   if (to.fullPath === '/admin/newpost') {
-    if (!store.getters.isAuthenticated) {
+    if (!store.getters.isAuthenticated || (store.getters.isAuthenticated && !store.getters.isAdmin)) {
       next('/auth');
     }
   }
   if (to.fullPath === '/admin/comments') {
-    if (!store.getters.isAuthenticated) {
+    if (!store.getters.isAuthenticated || (store.getters.isAuthenticated && !store.getters.isAdmin)) {
       next('/auth');
     }
   }
-
+  if (to.fullPath === '/admin/comments/:id') {
+    if (!store.getters.isAuthenticated || (store.getters.isAuthenticated && !store.getters.isAdmin)) {
+      next('/auth');
+    }
+  }
   document.title = to.meta.title;
   next();
 });
