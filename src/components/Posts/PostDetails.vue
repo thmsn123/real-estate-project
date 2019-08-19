@@ -42,7 +42,7 @@
         <p class="post-content">{{ currentPost.content }}</p>
       </section>
       <section class="post-feedback">
-        <router-link :to="{path: '/contact'}">Contact us</router-link>
+        <router-link v-if="isAdmin" :to="{path: '/contact'}">Contact us</router-link>
       </section>
     </v-card>
   </div>
@@ -50,6 +50,7 @@
 
 <script>
 import VueGallerySlideshow from "vue-gallery-slideshow";
+import {mapGetters} from "vuex";
 
 export default {
   name: "PostDetails",
@@ -66,6 +67,9 @@ export default {
     return {
       index: null
     };
+  },
+  computed: {
+    ...mapGetters(["isAdmin"])
   }
 };
 </script>

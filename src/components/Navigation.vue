@@ -6,19 +6,29 @@
     <b-navbar toggleable="lg" type="light" variant="light">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
-        <router-link class="nav-link" active-class="active" to="/">Home</router-link>
-        <router-link class="nav-link" active-class="active" to="/news">News</router-link>
-        <router-link class="nav-link" active-class="active" to="/rentals">Rentals</router-link>
-        <router-link class="nav-link" active-class="active" to="/sales">Sales</router-link>
-        <router-link class="nav-link" active-class="active" to="/aboutUs">About Us</router-link>
-        <router-link class="nav-link" active-class="active" to="/contact">Contact</router-link>
+        <router-link class="nav-link" active-class="active" :to="{path: '/'}">Home</router-link>
+        <router-link class="nav-link" active-class="active" :to="{path: '/news'}">News</router-link>
+        <router-link class="nav-link" active-class="active" :to="{path: '/rentals'}">Rentals</router-link>
+        <router-link class="nav-link" active-class="active" :to="{path: '/sales'}">Sales</router-link>
+        <router-link class="nav-link" active-class="active" :to="{path: '/aboutUs'}">About Us</router-link>
+        <router-link
+          v-if="isAuthenticated"
+          class="nav-link"
+          active-class="active"
+          to="/contact"
+        >Contact</router-link>
         <b-navbar-nav class="ml-auto">
           <template v-if="isAuthenticated">
-            <router-link class="nav-link" active-class="active" to="/admin">Admin</router-link>
+            <router-link
+              v-if="isAdmin"
+              class="nav-link"
+              active-class="active"
+              :to="{path: '/admin'}"
+            >Admin</router-link>
             <a class="nav-link" active-class="active" href="/" @click="logOut">Log out</a>
           </template>
           <template v-else>
-            <router-link class="nav-link" active-class="active" to="/auth">Login</router-link>
+            <router-link class="nav-link" active-class="active" :to="{path: '/auth'}">Login/Sign Up</router-link>
           </template>
         </b-navbar-nav>
       </b-collapse>
@@ -41,17 +51,17 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isAuthenticated"])
+    ...mapGetters(["isAuthenticated", "isAdmin"])
   },
   methods: {
-    ...mapActions(['logOut'])
+    ...mapActions(["logOut"])
   }
 };
 </script>
 
 <style scoped>
 .background-img {
-  overflow:hidden;
+  overflow: hidden;
   max-height: 30vh;
 }
 </style>
