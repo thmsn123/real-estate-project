@@ -10,7 +10,6 @@ import SalesDetails from "./views/Sales/SalesDetails";
 import AboutUs from "./views/AboutUs";
 import Contact from "./views/Contact";
 import Auth from "./views/Admin/Auth"
-import Admin from "./views/Admin/AdminPanel"
 import NewPost from "./views/Admin/NewPost"
 import Comments from './views/Admin/Comments/Comments'
 import CommentsDetails from './views/Admin/Comments/CommentsDetails'
@@ -104,15 +103,7 @@ const router = new Router({
       }
     },
     {
-      path: "/admin",
-      name: "admin",
-      component: Admin,
-      meta: {
-        title: "Admin Panel"
-      }
-    },
-    {
-      path: "/admin/newpost",
+      path: "/newpost",
       name: "newpost",
       component: NewPost,
       meta: {
@@ -120,7 +111,7 @@ const router = new Router({
       }
     },
     {
-      path: "/admin/comments",
+      path: "/comments",
       name: "comments",
       component: Comments,
       meta: {
@@ -128,7 +119,7 @@ const router = new Router({
       }
     },
     {
-      path: "/admin/comments/:id",
+      path: "/comments/:id",
       name: "commentsdetails",
       component: CommentsDetails,
       meta: {
@@ -159,22 +150,17 @@ router.beforeEach((to, from, next) => {
       next('/');
     }
   }
-  if (to.fullPath === '/admin') {
+  if (to.fullPath === '/newpost') {
     if (!store.getters.isAuthenticated || (store.getters.isAuthenticated && !store.getters.isAdmin)) {
       next('/auth');
     }
   }
-  if (to.fullPath === '/admin/newpost') {
+  if (to.fullPath === '/comments') {
     if (!store.getters.isAuthenticated || (store.getters.isAuthenticated && !store.getters.isAdmin)) {
       next('/auth');
     }
   }
-  if (to.fullPath === '/admin/comments') {
-    if (!store.getters.isAuthenticated || (store.getters.isAuthenticated && !store.getters.isAdmin)) {
-      next('/auth');
-    }
-  }
-  if (to.fullPath === '/admin/comments/:id') {
+  if (to.fullPath === '/comments/:id') {
     if (!store.getters.isAuthenticated || (store.getters.isAuthenticated && !store.getters.isAdmin)) {
       next('/auth');
     }

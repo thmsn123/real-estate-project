@@ -58,4 +58,8 @@ export default {
 .v-application--wrap {
   min-height: 0 !important;
 }
+#carousel-wrapper {
+  max-width: 50%;
+  margin: 0 auto !important;
+}
 </style>

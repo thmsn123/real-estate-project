@@ -1,9 +1,11 @@
 <template>
-  <div class="text-center my-3">
-    <div class="posts">
-      <post-list :loadedPosts="loadedRentals"></post-list>
+  <v-card>
+    <div class="container text-center my-3">
+      <div class="posts">
+        <post-list :loadedPosts="loadedRentals"></post-list>
+      </div>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>

@@ -1,7 +1,9 @@
 <template>
-  <div class="container my-3">
-    <post-form @submit="onSubmitted" class="my-3"></post-form>
-  </div>
+  <v-card class="wrapper">
+    <div class="container my-3">
+      <post-form @submit="onSubmitted" class="my-3"></post-form>
+    </div>
+  </v-card>
 </template>
 
 <script>
@@ -16,7 +18,7 @@ export default {
     ...mapActions(["addPost", "getPosts"]),
     onSubmitted(postData) {
       this.addPost(postData).then(() => {
-        this.$router.push("/admin");
+        this.$router.push("/");
 
         if (postData.postType === "news") {
           this.getPosts("news");
@@ -30,3 +32,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.wrapper {
+  margin: 30px;
+}
+.dropdown-item:active {
+  background-color: #f8f9fa;
+}
+</style>

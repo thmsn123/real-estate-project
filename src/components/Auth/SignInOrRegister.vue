@@ -60,7 +60,7 @@ export default {
         password: this.password
       }).then(statusCode => {
         if (statusCode === 200) {
-          this.$router.push("/admin");
+          this.$router.push("/");
         } else if (statusCode === 400) {
           this.errorMsg = "Invalid email address or password!";
         }
