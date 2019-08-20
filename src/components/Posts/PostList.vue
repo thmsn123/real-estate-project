@@ -40,6 +40,7 @@ export default {
 .post-list {
   display: flex;
   padding: 20px;
+  min-width: 880px;
   box-sizing: border-box;
   flex-wrap: wrap;
   align-items: center;

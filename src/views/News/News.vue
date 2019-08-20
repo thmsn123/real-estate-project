@@ -1,9 +1,11 @@
 <template>
-  <div class="text-center container my-3">
-    <div class="posts">
-      <post-list :loadedPosts="loadedNews"></post-list>
+  <v-card>
+    <div class="text-center container my-3 news">
+      <div class="posts">
+        <post-list :loadedPosts="loadedNews"></post-list>
+      </div>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>

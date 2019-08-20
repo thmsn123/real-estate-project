@@ -1,11 +1,7 @@
 <template>
-  <div>
-    <div class="background-img">
-      <b-img-lazy :src="backgroundImage" v-bind="imgProps" fluid-grow alt="Responsive image"></b-img-lazy>
-    </div>
-    <b-navbar toggleable="lg" type="light" variant="light">
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <b-collapse id="nav-collapse" is-nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav">
         <router-link class="nav-link" active-class="active" :to="{path: '/'}">Home</router-link>
         <router-link class="nav-link" active-class="active" :to="{path: '/news'}">News</router-link>
         <router-link class="nav-link" active-class="active" :to="{path: '/rentals'}">Rentals</router-link>
@@ -17,34 +13,46 @@
           active-class="active"
           to="/contact"
         >Contact</router-link>
-        <b-navbar-nav class="ml-auto">
-          <template v-if="isAuthenticated">
-            <router-link
-              v-if="isAdmin"
-              class="nav-link"
-              active-class="active"
-              :to="{path: '/admin'}"
-            >Admin</router-link>
-            <a class="nav-link" active-class="active" href="/" @click="logOut">Log out</a>
-          </template>
-          <template v-else>
-            <router-link class="nav-link" active-class="active" :to="{path: '/auth'}">Login/Sign Up</router-link>
-          </template>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <template v-if="isAuthenticated">
+          <b-nav-item-dropdown
+            v-if="isAdmin"
+            id="my-nav-dropdown"
+            text="Admin"
+            toggle-class="nav-link-custom"
+            right
+          >
+            <b-dropdown-item>
+              <router-link class="nav-link" :to="{path: '/newpost'}">Add New Post</router-link>
+            </b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item>
+              <router-link class="nav-link" :to="{path: '/comments'}">Comments</router-link>
+            </b-dropdown-item>
+          </b-nav-item-dropdown>
+          <router-link
+            class="nav-link"
+            active-class="active"
+            :to="{path: '/'}"
+            @click.native="logOut"
+          >Log out</router-link>
+        </template>
+        <template v-else>
+          <router-link class="nav-link" active-class="active" :to="{path: '/auth'}">Login/Sign Up</router-link>
+        </template>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <script>
-import backgroundImage from "../assets/background.jpg";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "NavBar",
   data() {
     return {
-      backgroundImage: backgroundImage,
       imgProps: {
         height: 200
       }
@@ -59,9 +67,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.background-img {
-  overflow: hidden;
-  max-height: 30vh;
-}
-</style>

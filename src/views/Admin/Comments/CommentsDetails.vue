@@ -5,7 +5,7 @@
         <v-toolbar-title>Inbox</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn>
-          <router-link class="nav-link" active-class="active" :to="{path: '/admin/comments'}">Back</router-link>
+          <router-link class="nav-link" active-class="active" :to="{path: '/comments'}">Back</router-link>
         </v-btn>
       </v-toolbar>
       <v-list three-line>

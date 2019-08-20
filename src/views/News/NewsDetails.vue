@@ -1,14 +1,16 @@
 <template>
-  <div class="single-post-page container my-3" v-if="currentNews">
-    <section class="post">
-      <h1 class="post-title">{{ currentNews.title }}</h1>
-      <div class="post-details">
-        <img class="post-thumbnail" :src="currentNews.thumbnail">
-      </div>
-      <p class="post-content">{{ currentNews.content }}</p>
-    </section>
-    <div class="post-author">Written by {{ currentNews.username }}</div>
-  </div>
+  <v-card>
+    <div class="single-post-page container my-3" v-if="currentNews">
+      <section class="post">
+        <h1 class="post-title">{{ currentNews.title }}</h1>
+        <div class="post-details">
+          <img class="post-thumbnail" :src="currentNews.thumbnail" />
+        </div>
+        <p class="post-content">{{ currentNews.content }}</p>
+      </section>
+      <div class="post-author">Written by {{ currentNews.username }}</div>
+    </div>
+  </v-card>
 </template>
 
 <script>
@@ -17,8 +19,8 @@ import { mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters(["currentPost"]),
-    currentNews(){
-      return this.currentPost(this.$route)
+    currentNews() {
+      return this.currentPost(this.$route);
     }
   }
 };
@@ -66,7 +68,7 @@ export default {
 .post-author {
   color: rgb(88, 88, 88);
   margin: 0 300px;
-  text-align: right;
+  text-align: center;
 }
 
 .post-thumbnail {
