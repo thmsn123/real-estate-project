@@ -67,3 +67,17 @@ export default {
 };
 </script>
 
+<style>
+.navbar{
+  opacity: 0.8;
+}
+#navbarResponsive {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+}
+.dropdown-item:active {
+  background-color: #f8f9fa !important;
+}
+</style>
+

@@ -1,46 +1,34 @@
 <template>
   <v-card>
-    <div class="container my-3">
-      <form @submit.prevent="onSubmit">
-        <div class="row">
-          <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-            <h3>Contact us</h3>
-            <div class="form-group">
-              <label for="user-name">Name:</label>
-              <input
-                type="text"
-                v-model.trim="$v.username.$model"
-                value="user-name"
-                :class="['form-control', {'alert-danger' : $v.username.$error}]"
-              />
-              <p class="alert alert-danger" v-if="$v.username.$error">Name is not valid!</p>
-            </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input
-                v-model.trim="$v.email.$model"
-                type="text"
-                id="email"
-                :class="['form-control', {'alert-danger' : $v.email.$error}]"
-              />
-              <p class="alert alert-danger" v-if="$v.email.$error">Email is not valid!</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 form-group">
-            <label for="description">Description</label>
-            <br />
-            <textarea v-model="description" id="description" rows="5" class="form-control"></textarea>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-            <button :disabled="$v.$invalid" class="btn btn-primary">Submit</button>
-          </div>
-        </div>
-      </form>
-    </div>
+    <form class="form-wrapper" @submit.prevent="onSubmit">
+      <h3>Contact us</h3>
+      <div class="form-group text-left">
+        <label for="user-name">Name:</label>
+        <input
+          type="text"
+          v-model.trim="$v.username.$model"
+          value="user-name"
+          :class="['form-control', {'alert-danger' : $v.username.$error}]"
+        />
+        <p class="alert alert-danger" v-if="$v.username.$error">Name is not valid!</p>
+      </div>
+      <div class="form-group text-left">
+        <label for="email">Email:</label>
+        <input
+          v-model.trim="$v.email.$model"
+          type="text"
+          id="email"
+          :class="['form-control', {'alert-danger' : $v.email.$error}]"
+        />
+        <p class="alert alert-danger" v-if="$v.email.$error">Email is not valid!</p>
+      </div>
+      <div class="form-group text-left">
+        <label for="description">Description</label>
+        <br />
+        <textarea v-model="description" id="description" rows="5" class="form-control"></textarea>
+      </div>
+      <button :disabled="$v.$invalid" class="btn btn-primary">Submit</button>
+    </form>
   </v-card>
 </template>
 
@@ -83,3 +71,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.form-wrapper {
+  padding: 20px;
+  width: 50%;
+  margin: 20px auto;
+}
+</style>
