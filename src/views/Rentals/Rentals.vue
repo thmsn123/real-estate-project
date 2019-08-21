@@ -28,4 +28,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.container {
+  min-height: 450px;
+}
 </style>

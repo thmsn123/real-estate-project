@@ -12,7 +12,9 @@
         <div class="container h-100">
           <div class="row h-100 align-items-center">
             <div class="col-12 text-center page-content">
-              <router-view />
+              <transition name="bounce">
+                <router-view></router-view>
+              </transition>
             </div>
           </div>
         </div>
@@ -66,7 +68,8 @@ export default {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
 }
-body::-webkit-scrollbar, .page-content::-webkit-scrollbar {
+body::-webkit-scrollbar,
+.page-content::-webkit-scrollbar {
   /* WebKit */
   width: 0;
   height: 0;
@@ -106,6 +109,25 @@ body::-webkit-scrollbar, .page-content::-webkit-scrollbar {
   }
   100% {
     background-position: 3% 50%;
+  }
+}
+
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>

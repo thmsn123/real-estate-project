@@ -6,12 +6,17 @@ import Vuelidate from 'vuelidate'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import '@mdi/font/css/materialdesignicons.css'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuelidate);
 Vue.use(BootstrapVue);
-const vuetifyOptions = { }
+const vuetifyOptions = { 
+    icons: {
+        iconfont: 'mdi'
+    }
+}
 Vue.use(Vuetify);
 Vue.filter('toEuro', function (value) {
     return `${value} €`;
