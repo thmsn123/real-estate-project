@@ -1,10 +1,10 @@
 # real-estate-project
 
-#Title
-#Idea
-#Design
-##Pages
-###Functionality
+# Title
+# Idea
+# Design
+## Pages
+### Functionality
 
 ## Project setup
 ```
