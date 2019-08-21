@@ -1,7 +1,7 @@
 <template>
   <form class="form-wrapper" @submit.prevent="onSave">
     <h3>Add new post</h3>
-    <div class="form-group">
+    <div class="form-group text-left">
       <label for="user-name">Author name:</label>
       <input
         type="text"
@@ -11,7 +11,7 @@
       />
       <p class="alert alert-danger" v-if="$v.username.$error">Name is not valid!</p>
     </div>
-    <div class="form-group">
+    <div class="form-group text-left">
       <label for="postType">Post type:</label>
       <select
         id="postType"
@@ -24,15 +24,15 @@
       </select>
       <p class="alert alert-danger" v-if="$v.postType.$error">Please choose an option!</p>
     </div>
-    <div class="form-group">
+    <div class="form-group text-left">
       <label for="title">Title:</label>
       <input type="text" v-model.trim="title" value="title" class="form-control" />
     </div>
-    <div class="form-group" v-if="postType !== 'news'">
+    <div class="form-group text-left" v-if="postType !== 'news'">
       <label for="price">Price:</label>
       <input type="text" v-model.trim="price" value="price" class="form-control" />
     </div>
-    <div class="form-group" v-if="postType !== 'news'">
+    <div class="form-group text-left" v-if="postType !== 'news'">
       <label for="propertyType">Property type:</label>
       <select id="propertyType" v-model="propertyType" class="form-control">
         <option value="Studio">Studio</option>
@@ -43,7 +43,7 @@
         <option value="Rural property">Rural property</option>
       </select>
     </div>
-    <div class="form-group" v-if="postType !== 'news'">
+    <div class="form-group text-left" v-if="postType !== 'news'">
       <label for="location">Location:</label>
       <select id="location" v-model="location" class="form-control">
         <option value="Kavarna">Kavarna</option>
@@ -54,11 +54,11 @@
         <option value="Tyulenovo">Tyulenovo</option>
       </select>
     </div>
-    <div class="form-group" v-if="postType !== 'news'">
+    <div class="form-group text-left" v-if="postType !== 'news'">
       <label for="propertySize">Property size:</label>
       <input type="text" v-model.trim="propertySize" value="propertySize" class="form-control" />
     </div>
-    <div class="form-group" v-if="postType !== 'news'">
+    <div class="form-group text-left" v-if="postType !== 'news'">
       <label for="constructionYear">Year of construction:</label>
       <input
         type="text"
@@ -67,15 +67,15 @@
         class="form-control"
       />
     </div>
-    <div class="form-group">
+    <div class="form-group text-left">
       <label for="thumbnail">Thumbnail:</label>
       <input type="text" v-model.trim="thumbnail" value="thumbnail" class="form-control" />
     </div>
-    <div class="form-group" v-if="postType !== 'news'">
+    <div class="form-group text-left" v-if="postType !== 'news'">
       <label for="gallery">Gallery urls:</label>
       <input type="text" v-model.trim="gallery" value="gallery" class="form-control" />
     </div>
-    <div class="form-group">
+    <div class="form-group text-left">
       <label for="content">Content:</label>
       <br />
       <textarea v-model="content" id="content" rows="5" class="form-control"></textarea>

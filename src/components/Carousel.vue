@@ -1,6 +1,11 @@
 <template>
   <v-app id="carousel-wrapper">
-    <v-carousel>
+    <v-carousel
+      dark
+      delimiter-icon="$vuetify.icons.delimiter"
+      prev-icon="$vuetify.icons.prev"
+      next-icon="$vuetify.icons.next"
+    >
       <v-carousel-item
         v-for="(item,i) in items"
         :key="i"

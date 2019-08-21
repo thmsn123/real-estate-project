@@ -173,6 +173,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: baseline;
+  justify-content: center;
   flex-wrap: wrap;
 }
 .sortersBtn {
