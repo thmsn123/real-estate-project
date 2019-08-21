@@ -11,7 +11,7 @@
       >
         <div class="container h-100">
           <div class="row h-100 align-items-center">
-            <div class="col-12 text-center">
+            <div class="col-12 text-center page-content">
               <router-view />
             </div>
           </div>
@@ -60,12 +60,13 @@ export default {
 .container {
   padding-top: 30px !important;
 }
-#main {
+.page-content {
   overflow-y: auto;
+  max-height: 100vh;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
 }
-#main::-webkit-scrollbar {
+body::-webkit-scrollbar, .page-content::-webkit-scrollbar {
   /* WebKit */
   width: 0;
   height: 0;

@@ -37,7 +37,4 @@ export default {
 .wrapper {
   margin: 30px;
 }
-.dropdown-item:active {
-  background-color: #f8f9fa;
-}
 </style>
