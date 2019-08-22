@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <nprogress-container></nprogress-container>
     <header class="header">
       <nav-bar></nav-bar>
     </header>
@@ -31,11 +32,13 @@
 import NavBar from "./components/Navigation";
 import NavFooter from "./components/Footer";
 import backgroundImage from "./assets/background.jpg";
+import NprogressContainer from "vue-nprogress/src/NprogressContainer";
 
 export default {
   components: {
     NavBar,
-    NavFooter
+    NavFooter,
+    NprogressContainer
   },
   created() {
     this.$store.dispatch("getPosts", "news");
@@ -113,10 +116,10 @@ body::-webkit-scrollbar,
 }
 
 .bounce-enter-active {
-  animation: bounce-in .5s;
+  animation: bounce-in 0.5s;
 }
 .bounce-leave-active {
-  animation: bounce-in .5s reverse;
+  animation: bounce-in 0.5s reverse;
 }
 
 @keyframes bounce-in {
@@ -129,5 +132,10 @@ body::-webkit-scrollbar,
   100% {
     transform: scale(1);
   }
+}
+
+.nprogress-container {
+  height: 2px;
+  background: black;
 }
 </style>

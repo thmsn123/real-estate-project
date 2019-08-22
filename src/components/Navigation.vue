@@ -1,20 +1,36 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav">
-        <router-link class="nav-link" active-class="active" :to="{path: '/'}">Home</router-link>
-        <router-link class="nav-link" active-class="active" :to="{path: '/news'}">News</router-link>
-        <router-link class="nav-link" active-class="active" :to="{path: '/rentals'}">Rentals</router-link>
-        <router-link class="nav-link" active-class="active" :to="{path: '/sales'}">Sales</router-link>
-        <router-link class="nav-link" active-class="active" :to="{path: '/aboutUs'}">About Us</router-link>
-        <router-link
-          v-if="isAuthenticated"
-          class="nav-link"
-          active-class="active"
-          to="/contact"
-        >Contact</router-link>
-      </ul>
-      <ul class="navbar-nav ml-auto">
+  <b-navbar toggleable="lg" class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item>
+          <router-link class="nav-link" active-class="active" :to="{path: '/'}">Home</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link class="nav-link" active-class="active" :to="{path: '/news'}">News</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link class="nav-link" active-class="active" :to="{path: '/rentals'}">Rentals</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link class="nav-link" active-class="active" :to="{path: '/sales'}">Sales</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link class="nav-link" active-class="active" :to="{path: '/aboutUs'}">About Us</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link
+            v-if="isAuthenticated"
+            class="nav-link"
+            active-class="active"
+            to="/contact"
+          >Contact</router-link>
+        </b-nav-item>
+      </b-navbar-nav>
+
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
         <template v-if="isAuthenticated">
           <b-nav-item-dropdown
             v-if="isAdmin"
@@ -41,9 +57,9 @@
         <template v-else>
           <router-link class="nav-link" active-class="active" :to="{path: '/auth'}">Login/Sign Up</router-link>
         </template>
-      </ul>
-    </div>
-  </nav>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
 </template>
 
 <script>
@@ -68,10 +84,10 @@ export default {
 </script>
 
 <style>
-.navbar{
+.navbar {
   opacity: 0.8;
 }
-#navbarResponsive {
+.navbar-collapse.collapse {
   font-size: 20px;
   line-height: 30px;
   font-weight: 700;

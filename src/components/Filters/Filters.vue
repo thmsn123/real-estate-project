@@ -13,13 +13,14 @@
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
           <div v-for="(item, index) in types" :key="index">
             <div
+              :value="item"
               :class="['popper-content', 'sort-popper-content', {'popper-content-selected': selectedFilterProp === item ? true:false}]"
               @click="filterData($event, 'type')"
             >{{item}}</div>
           </div>
         </v-btn-toggle>
       </div>
-      <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Type</v-btn>
+      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Type</v-btn>
     </popper>
     <popper
       v-if="this.$router.currentRoute.name === 'sales'"
@@ -34,13 +35,14 @@
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
           <div v-for="(item, index) in salesPriceRanges" :key="index">
             <div
+              :value="item"
               :class="['popper-content', 'sort-popper-content', {'popper-content-selected': selectedFilterProp === item ? true:false}]"
               @click="filterData($event, 'price')"
             >{{item | toEuro}}</div>
           </div>
         </v-btn-toggle>
       </div>
-      <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Price</v-btn>
+      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Price</v-btn>
     </popper>
     <popper
       v-else
@@ -55,13 +57,14 @@
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
           <div v-for="(item, index) in rentalsPriceRanges" :key="index">
             <div
+              :value="item"
               :class="['popper-content', 'sort-popper-content', {'popper-content-selected': selectedFilterProp === item ? true:false}]"
               @click="filterData($event, 'price')"
             >{{item | toEuro}}</div>
           </div>
         </v-btn-toggle>
       </div>
-      <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Price</v-btn>
+      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Price</v-btn>
     </popper>
     <popper
       class="popperWrapper"
@@ -75,17 +78,18 @@
         <v-btn-toggle style="float:left;box-shadow: none; flex-direction: column;">
           <div v-for="(item, index) in locations" :key="index">
             <div
+              :value="item"
               :class="['popper-content', 'sort-popper-content', {'popper-content-selected': selectedFilterProp === item ? true:false}]"
               @click="filterData($event, 'location')"
             >{{item}}</div>
           </div>
         </v-btn-toggle>
       </div>
-      <v-btn small class="whiteTextBtn sortersBtn" text slot="reference">Location</v-btn>
+      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Location</v-btn>
     </popper>
-    <div>
+    <div style="margin-left: 5px">
       <span></span>
-      <v-btn small class="whiteTextBtn sortersBtn" text slot="reference" @click="clearFilter">X</v-btn>
+      <v-btn small class="clearFilterButton sortersBtn" text slot="reference" @click="clearFilter">X</v-btn>
     </div>
   </div>
 </template>
@@ -143,7 +147,7 @@ export default {
     ...mapMutations(["FILTER_DATA"]),
     ...mapActions(["getPosts"]),
     filterData(e, filterItem) {
-      this.selectedFilterProp = e.target.textContent;
+      this.selectedFilterProp = event.target.getAttribute("value");
       this.FILTER_DATA({
         event: e,
         filter: filterItem,
@@ -181,7 +185,7 @@ export default {
   padding: 0px !important;
   margin: 0px !important;
 }
-.whiteTextBtn {
+.standardFiltersButton {
   color: #000;
   background: #fff;
   font-weight: bold;
@@ -190,6 +194,16 @@ export default {
   font-size: 1rem;
   font-weight: 500;
   color: #3a3a3a;
+  top: -0.07143rem;
+}
+.clearFilterButton {
+  background: #f59696;
+  color: #fff !important;
+  font-weight: bold;
+  box-shadow: 0.07143rem 0.1429rem 0.3571rem 0.07143rem rgba(29, 29, 29, 0.08);
+  padding: 0 0.7rem !important;
+  font-size: 1rem;
+  font-weight: 500;
   top: -0.07143rem;
 }
 .popper-content-selected {
