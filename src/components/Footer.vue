@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <v-app id="inspire">
+  <div>
+    <v-app>
       <v-footer color="light lighten-1" padless>
         <v-row class="footer-nav" justify="center" no-gutters>
           <router-link color="white" text rounded class="my-2" :to="{path: '/'}">Home</router-link>

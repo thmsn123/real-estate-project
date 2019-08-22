@@ -1,7 +1,7 @@
 <template>
   <router-link :to="{name: loadedPost.postType + 'details', params: {id: loadedPost.id}}" class="post-preview">
-    <v-card class="mx-auto" width="400" height="280">
-      <v-img class="white--text" height="200px" :src="loadedPost.thumbnail"></v-img>
+    <v-card class="mx-auto" width="25rem" height="17.5rem">
+      <v-img class="white--text" height="12.5rem" :src="loadedPost.thumbnail"></v-img>
       <v-card-text>
         <span class="text--primary title">{{loadedPost.title}}</span>
         <div v-if="loadedPost.price" class="text--secondary">{{loadedPost.price | toEuro}} | {{loadedPost.location}} | {{loadedPost.propertyType}}</div>

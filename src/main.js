@@ -9,23 +9,37 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@mdi/font/css/materialdesignicons.css'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import NProgress from 'vue-nprogress'
+
+const options = {
+    latencyThreshold: 300, 
+    router: true, 
+    http: false
+};
 
 Vue.use(Vuelidate);
 Vue.use(BootstrapVue);
-const vuetifyOptions = { 
+Vue.use(Vuetify);
+Vue.use(NProgress, options);
+
+const nprogress = new NProgress({ parent: '.nprogress-container' })
+Vue.config.productionTip = false;
+
+const vuetifyOptions = {
     icons: {
         iconfont: 'mdi'
     }
 }
-Vue.use(Vuetify);
+
 Vue.filter('toEuro', function (value) {
     return `${value} €`;
 });
-Vue.config.productionTip = false;
+
 
 new Vue({
     router,
     store,
     vuetify: new Vuetify(vuetifyOptions),
+    nprogress,
     render: h => h(App)
 }).$mount("#app");

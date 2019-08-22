@@ -67,24 +67,24 @@ export default new Vuex.Store({
             if (data.filter === "type") {
                 if (data.page === "sales") {
                     state.loadedSales = state.loadedSales.filter(
-                        item => item.propertyType.toLowerCase() === data.event.target.textContent.toLowerCase()
+                        item => item.propertyType.toLowerCase() === data.event.target.getAttribute("value").toLowerCase()
                     )
                 } else {
                     state.loadedRentals = state.loadedRentals.filter(
-                        item => item.propertyType.toLowerCase() === data.event.target.textContent.toLowerCase()
+                        item => item.propertyType.toLowerCase() === data.event.target.getAttribute("value").toLowerCase()
                     )
                 }
             } else if (data.filter === "price") {
                 if (data.page === "sales") {
-                    if (data.event.target.textContent.toLowerCase() === "to 20000 €") {
+                    if (data.event.target.getAttribute("value").toLowerCase() === "to 20000") {
                         state.loadedSales = state.loadedSales.filter(
                             item => item.price <= 20000
                         )
-                    } else if (data.event.target.textContent.toLowerCase() === "from 20000 to 50000 €") {
+                    } else if (data.event.target.getAttribute("value").toLowerCase() === "from 20000 to 50000") {
                         state.loadedSales = state.loadedSales.filter(
                             item => item.price >= 20000 && item.price <= 50000
                         )
-                    } else if (data.event.target.textContent.toLowerCase() === "from 50000 to 100000 €") {
+                    } else if (data.event.target.getAttribute("value").toLowerCase() === "from 50000 to 100000") {
                         state.loadedSales = state.loadedSales.filter(
                             item => item.price >= 50000 && item.price <= 100000
                         )
@@ -94,15 +94,15 @@ export default new Vuex.Store({
                         )
                     }
                 } else {
-                    if (data.event.target.textContent.toLowerCase() === "to 500 €") {
+                    if (data.event.target.getAttribute("value").toLowerCase() === "to 100") {
                         state.loadedRentals = state.loadedRentals.filter(
-                            item => item.price <= 500
+                            item => item.price <= 100
                         )
-                    } else if (data.event.target.textContent.toLowerCase() === "from 100 to 500 €") {
+                    } else if (data.event.target.getAttribute("value").toLowerCase() === "from 100 to 500") {
                         state.loadedRentals = state.loadedRentals.filter(
                             item => item.price >= 100 && item.price <= 500
                         )
-                    } else if (data.event.target.textContent.toLowerCase() === "from 500 to 1000 €") {
+                    } else if (data.event.target.getAttribute("value").toLowerCase() === "from 500 to 1000") {
                         state.loadedRentals = state.loadedRentals.filter(
                             item => item.price >= 500 && item.price <= 1000
                         )
@@ -115,11 +115,11 @@ export default new Vuex.Store({
             } else {
                 if (data.page === "sales") {
                     state.loadedSales = state.loadedSales.filter(
-                        item => item.location.toLowerCase() === data.event.target.textContent.toLowerCase()
+                        item => item.location.toLowerCase() === data.event.target.getAttribute("value").toLowerCase()
                     )
                 } else {
                     state.loadedRentals = state.loadedRentals.filter(
-                        item => item.location.toLowerCase() === data.event.target.textContent.toLowerCase()
+                        item => item.location.toLowerCase() === data.event.target.getAttribute("value").toLowerCase()
                     )
                 }
             }
