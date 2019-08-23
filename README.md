@@ -4,7 +4,7 @@
 Single page application for listing real estate properties for sale - apartments, houses, villas, properties and etc.
 
 ## Design
-Mainly used material design libraries - bootstrap and vuetify.
+Mainly used material design libraries - bootstrap-vue and vuetify.
 
 ## Pages
 ### Home 
