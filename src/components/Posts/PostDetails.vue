@@ -1,6 +1,9 @@
 <template>
   <div>
     <v-card class="card">
+      <router-link :to="{path: getParentRoute()}">
+        <v-btn medium dark absolute top left>Back</v-btn>
+      </router-link>
       <v-toolbar-title class="title">{{ currentPost.title }}</v-toolbar-title>
       <img
         class="image"
@@ -50,7 +53,7 @@
 
 <script>
 import VueGallerySlideshow from "vue-gallery-slideshow";
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "PostDetails",
@@ -61,12 +64,17 @@ export default {
     }
   },
   components: {
-      VueGallerySlideshow
+    VueGallerySlideshow
   },
   data() {
     return {
       index: null
     };
+  },
+  methods: {
+    getParentRoute() {
+      return `/${this.$route.path.split("/")[1]}`;
+    }
   },
   computed: {
     ...mapGetters(["isAdmin"])

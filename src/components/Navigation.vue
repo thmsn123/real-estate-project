@@ -5,7 +5,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item>
-          <router-link class="nav-link" active-class="active" :to="{path: '/'}">Home</router-link>
+          <router-link class="nav-link" active-class="active" :to="{path: '/'}" exact>Home</router-link>
         </b-nav-item>
         <b-nav-item>
           <router-link class="nav-link" active-class="active" :to="{path: '/news'}">News</router-link>
@@ -47,12 +47,7 @@
               <router-link class="nav-link" :to="{path: '/comments'}">Comments</router-link>
             </b-dropdown-item>
           </b-nav-item-dropdown>
-          <router-link
-            class="nav-link"
-            active-class="active"
-            :to="{path: '/'}"
-            @click.native="logOut"
-          >Log out</router-link>
+          <b-nav-item @click="logOutUser">Log Out</b-nav-item>
         </template>
         <template v-else>
           <router-link class="nav-link" active-class="active" :to="{path: '/auth'}">Login/Sign Up</router-link>
@@ -78,7 +73,12 @@ export default {
     ...mapGetters(["isAuthenticated", "isAdmin"])
   },
   methods: {
-    ...mapActions(["logOut"])
+    ...mapActions(["logOut"]),
+    logOutUser(){
+      this.logOut();
+      //this is used in order to set bootstrap active class in home page only;
+      this.$router.push('/');
+    }
   }
 };
 </script>

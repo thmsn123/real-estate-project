@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <nprogress-container></nprogress-container>
-    <header class="header">
-      <nav-bar></nav-bar>
-    </header>
+
+    <nav-bar></nav-bar>
+
     <div id="main">
       <!-- Main Content -->
       <div
@@ -55,15 +55,16 @@ export default {
 </script>
 
 <style>
+body {
+  font-size: 16px;
+}
 .main-content {
   height: 100vh;
   min-height: 500px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-.container {
-  padding-top: 30px !important;
+  background-attachment: fixed;
 }
 .page-content {
   overflow-y: auto;

@@ -1,6 +1,6 @@
 <template>
   <v-card class="wrapper">
-    <div class="container my-3">
+    <div class="container p-5">
       <post-form @submit="onSubmitted" class="my-3"></post-form>
     </div>
   </v-card>
@@ -36,5 +36,9 @@ export default {
 <style scoped>
 .wrapper {
   margin: 30px;
+}
+.container {
+  margin-top: 100px;
+  margin-bottom: 20px;
 }
 </style>

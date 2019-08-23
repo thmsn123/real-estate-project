@@ -1,5 +1,8 @@
 <template>
   <v-card>
+    <router-link :to="{path: '/news'}">
+      <v-btn medium dark absolute top left>Back</v-btn>
+    </router-link>
     <div class="single-post-page container my-3" v-if="currentNews">
       <section class="post">
         <h1 class="post-title">{{ currentNews.title }}</h1>
@@ -57,6 +60,10 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.post-content {
+  padding-top: 10px;
 }
 
 @media (min-width: 768px) {
