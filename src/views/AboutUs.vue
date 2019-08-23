@@ -11,13 +11,14 @@
         <div>
           <h3>Contact us</h3>
           <div class="office-contacts">
-            <div class="phone">Tel: +359 2 8591370</div>
-            <div class="mobile-phone">
-              Mob: +359 8123456
-              <br />Mob: +359 654321
+            <div class="phone">
+              <span class="font-weight-bold">Tel:</span> +359 2 8591370
             </div>
-            <div class="e-mail">E-mail: sales@kavarnarealestate.com</div>
-            <div class="address">Address: 12, Dobrotitza, floor 2, office 10, Kavarna</div>
+            <div class="mobile-phone">
+              <span class="font-weight-bold">Mob:</span> +359 8123456
+            </div>
+            <div class="e-mail"><span class="font-weight-bold">E-mail:</span> sales@kavarnarealestate.com</div>
+            <div class="address"><span class="font-weight-bold">Address:</span> 12, Dobrotitza, floor 2, office 10, Kavarna</div>
           </div>
         </div>
         <div>
@@ -45,6 +46,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
 .carousel {
   margin: 1rem 0 !important;
 }

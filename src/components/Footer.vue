@@ -20,7 +20,6 @@
             &copy;
             {{ new Date().getFullYear() }} —
             <strong>ttm2</strong>
-            All rights reserved | Terms of Use | Privacy Policy
           </v-col>
         </v-row>
       </v-footer>

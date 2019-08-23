@@ -140,11 +140,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.form-wrapper {
-  padding: 20px;
-  width: 50%;
-  margin: 20px auto;
-}
-</style>
