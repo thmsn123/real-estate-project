@@ -32,9 +32,9 @@ Another optin in Admin dropdown is Comments, where the administrator can read th
 ### Auth  
 User may log in or register in that menu. In case of a wrong password or email is displayed a message.
 
-##URL
+## URL
 ```
-[a link](https://real-estate-project-e32ed.firebaseapp.com/)
+https://real-estate-project-e32ed.firebaseapp.com/
 ```
 
 ## Project setup
