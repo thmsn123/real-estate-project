@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div v-if="errorMsg" class="error-msg">
-      {{errorMsg}}
-      <p></p>
-    </div>
+    <message-container :response="response"></message-container>
     <form @submit.prevent="onSubmit">
       <div class="input-control">
         <label for="email">Email</label>
@@ -34,6 +31,7 @@
 </template>
 
 <script>
+import MessageContainer from "../../components/Auth/MessageContainer"
 import { required, minLength, alphaNum, email } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
 
@@ -44,9 +42,15 @@ export default {
       required: true
     }
   },
+  components: {
+    MessageContainer
+  },
   data() {
     return {
-      errorMsg: "",
+      response: {
+        status: "",
+        msg: ""
+      },
       email: "",
       password: ""
     };
@@ -58,11 +62,15 @@ export default {
         isLogin: this.isLogin,
         email: this.email,
         password: this.password
-      }).then(statusCode => {
-        if (statusCode === 200) {
+      }).then(result => {
+        if (result.status === 200) {
+          this.response.status = 200;
+          this.response.msg = "You logged in successfully!";
+
           this.$router.push("/");
-        } else if (statusCode === 400) {
-          this.errorMsg = "Invalid email address or password!";
+        } else if (result.status === 400) {
+          this.response.status = 400;
+          this.response.msg = result.message.replace(/_/g, " ") + "!";
         }
       });
     }
@@ -105,11 +113,8 @@ export default {
   background-color: #eee;
   outline: none;
 }
-.error-msg {
-  text-align: center;
-  color: red;
-}
-.password{
+
+.password {
   margin-top: 5px;
 }
 </style>

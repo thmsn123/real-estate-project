@@ -158,7 +158,7 @@ export default new Vuex.Store({
                         context.commit("SET_LOADED_RENTALS", loadedPosts);
                     }
                 })
-                .catch(e => context.error(e));
+                .catch(e => console.error(e));
         },
         getComments(context) {
             return axios.get(config.fbConfig.dbURL + "/comments.json")
@@ -176,17 +176,27 @@ export default new Vuex.Store({
             return axios
                 .post(config.fbConfig.dbURL + post.postType + ".json?auth=" + context.state.authToken, post)
                 .then(result => {
-                    console.log(result);
+                    return { status: result.status };
                 })
-                .catch(e => console.log(e));
+                .catch(e => {
+                    return {
+                        status: error.response.status,
+                        message: error.response.data.error.message
+                    };
+                });
         },
         addComment(context, post) {
             return axios
                 .post(config.fbConfig.dbURL + "comments.json?auth=" + context.state.authToken, post)
                 .then(result => {
-                    console.log(result);
+                    return { status: result.status };
                 })
-                .catch(e => console.log(e));
+                .catch(e => {
+                    return {
+                        status: error.response.status,
+                        message: error.response.data.error.message
+                    };
+                });
         },
         authenticateUser(context, authData) {
             let authUrl = config.fbConfig.authDomain + "verifyPassword?key=" + config.fbConfig.apiIKey;
@@ -200,17 +210,18 @@ export default new Vuex.Store({
                 password: authData.password,
                 returnSecureToken: true
             }).then(result => {
-                console.log(result)
                 context.commit('SET_TOKEN', result.data.idToken);
                 context.commit('SET_ADMIN_STATUS', result.data.localId);
                 localStorage.setItem("token", result.data.idToken);
                 localStorage.setItem("localId", result.data.localId);
                 localStorage.setItem('tokenExpiration', new Date().getTime() + +result.data.expiresIn * 1000);
-
-                return result.status;
+                return { status: result.status };
             })
                 .catch(error => {
-                    return error.response.status;
+                    return {
+                        status: error.response.status,
+                        message: error.response.data.error.message
+                    };
                 });
         },
         initAuth(context) {
