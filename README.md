@@ -4,14 +4,14 @@
 Single page application for listing real estate properties for sale - apartments, houses, villas, properties and etc.
 
 ## Design
-Used bootstrap and vuetify.
+Mainly used material design libraries - bootstrap and vuetify.
 
 ## Pages
 ### Home 
 Introductory page to customers.
 
 ### News
-renders a list of news about the region.
+Renders a list of news about the region.
 
 ### Rentals
 Renders a list of rentals and a filter for the type of the property, price ranges and the location .On clicking the advertisement opens a card, which contains information about the price, property type, location, construction year, description and a gallery slider. 
@@ -31,6 +31,11 @@ Another optin in Admin dropdown is Comments, where the administrator can read th
 
 ### Auth  
 User may log in or register in that menu. In case of a wrong password or email is displayed a message.
+
+##URL
+```
+[a link](https://real-estate-project-e32ed.firebaseapp.com/)
+```
 
 ## Project setup
 ```
