@@ -1,5 +1,6 @@
 <template>
   <v-card>
+    <message-container :response="response"></message-container>
     <div class="container p-5">
       <form class="form-wrapper" @submit.prevent="onSubmit">
         <h3>Contact us</h3>
@@ -35,16 +36,25 @@
 </template>
 
 <script>
+import MessageContainer from "../components/Auth/MessageContainer";
 import { mapActions } from "vuex";
 import { required, email } from "vuelidate/lib/validators";
 
 export default {
-  name: "app",
+  components: {
+    MessageContainer
+  },
   data() {
     return {
       username: "",
       email: "",
-      description: ""
+      description: "",
+      errorMsg: "",
+      successMsg: "",
+      response: {
+        status: "",
+        msg: ""
+      }
     };
   },
   methods: {
@@ -57,8 +67,16 @@ export default {
         date: new Date()
       };
 
-      this.addComment(postData).then(() => {
-        this.$router.push("/");
+      this.addComment(postData).then(result => {
+        if (result.status === 200) {
+          this.response.status = 200;
+          this.response.msg = "You added your comment successfully!";
+
+          this.$router.push("/");
+        } else if (result.status === 400) {
+          this.response.status = 400;
+          this.response.msg = result.message.replace(/_/g, " ") + "!";
+        }
       });
     }
   },
