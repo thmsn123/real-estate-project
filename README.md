@@ -34,7 +34,7 @@ User may log in or register in that menu. In case of a wrong password or email i
 
 ## URL
 ```
-[real-estate-project](https://real-estate-project-e32ed.firebaseapp.com/)
+(https://real-estate-project-e32ed.firebaseapp.com/)
 ```
 
 ## Project setup
