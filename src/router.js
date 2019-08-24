@@ -147,7 +147,7 @@ router.beforeEach((to, from, next) => {
   }
   if (to.fullPath === '/contact') {
     if (!store.getters.isAuthenticated) {
-      next('/');
+      next('/auth');
     }
   }
   if (to.fullPath === '/newpost') {
