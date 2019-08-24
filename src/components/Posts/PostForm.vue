@@ -5,11 +5,11 @@
       <label for="user-name">Author name:</label>
       <input
         type="text"
-        v-model.trim="$v.username.$model"
+        v-model.trim="$v.author.$model"
         value="user-name"
-        :class="['form-control', {'alert-danger' : $v.username.$error}]"
+        :class="['form-control', {'alert-danger' : $v.author.$error}]"
       />
-      <p class="alert alert-danger" v-if="$v.username.$error">Name is not valid!</p>
+      <p class="alert alert-danger" v-if="$v.author.$error">Name is not valid!</p>
     </div>
     <div class="form-group text-left">
       <label for="postType">Post type:</label>
@@ -67,20 +67,31 @@
         class="form-control"
       />
     </div>
-    <div class="form-group text-left">
-      <label for="thumbnail">Thumbnail:</label>
-      <input type="text" v-model.trim="thumbnail" value="thumbnail" class="form-control" />
-    </div>
-    <div class="form-group text-left" v-if="postType !== 'news'">
-      <label for="gallery">Gallery urls:</label>
-      <input type="text" v-model.trim="gallery" value="gallery" class="form-control" />
-    </div>
+    <b-form-group label="Add images to gallery:" label-for="gallery" class="text-left">
+      <b-form-file
+        id="gallery"
+        v-model="gallery"
+        accept="image/*"
+        value="gallery"
+        multiple
+        placeholder="Choose a file or drop it here..."
+        drop-placeholder="Drop file here..."
+        @change="uploadFiles"
+      ></b-form-file>
+      <div class="mt-3">
+        Selected files:
+        <span v-for="(file, index) in gallery" :key="index">{{ file.name }}</span>
+      </div>
+      <div v-if="uploadMessage" class="alert alert-success">
+        <span>{{uploadMessage}}</span>
+      </div>
+    </b-form-group>
     <div class="form-group text-left">
       <label for="content">Content:</label>
       <br />
       <textarea v-model="content" id="content" rows="5" class="form-control"></textarea>
     </div>
-    <div v-if="postType === 'news'" class="form-group">
+    <div v-if="postType === 'news'" class="form-group text-left">
       <label for="preview">Preview Text:</label>
       <br />
       <textarea v-model="preview" id="preview" rows="5" class="form-control"></textarea>
@@ -91,12 +102,13 @@
 
 <script>
 import { required, email } from "vuelidate/lib/validators";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "app",
   data() {
     return {
-      username: "",
+      author: "",
       postType: "",
       propertyType: "",
       title: "",
@@ -104,16 +116,27 @@ export default {
       propertySize: "",
       constructionYear: "",
       price: "",
-      thumbnail: "",
-      gallery: "",
+      gallery: [],
       content: "",
-      preview: ""
+      preview: "",
+      uploadMessage: ""
     };
   },
+  computed: {
+    ...mapGetters(["loadedImages"])
+  },
   methods: {
+    ...mapActions(["addFilesToStorage"]),
+    uploadFiles() {
+      this.addFilesToStorage(gallery).then(resp => {
+        if (resp.status === "ok") {
+          this.uploadMessage = "The attachments were uploaded!";
+        }
+      });
+    },
     onSave() {
       let postData = {
-        username: this.username,
+        author: this.author,
         postType: this.postType,
         propertyType: this.propertyType,
         title: this.title,
@@ -121,17 +144,17 @@ export default {
         propertySize: this.propertySize,
         constructionYear: this.constructionYear,
         price: this.price,
-        thumbnail: this.thumbnail,
-        gallery: this.gallery,
         content: this.content,
         preview: this.preview,
         date: new Date()
       };
+
+      postData.gallery = this.loadedImages.toString();
       this.$emit("submit", postData);
     }
   },
   validations: {
-    username: {
+    author: {
       required
     },
     postType: {
