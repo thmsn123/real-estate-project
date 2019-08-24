@@ -110,7 +110,8 @@ export default {
   data() {
     return {
       types: [
-        "One bedrooms apartment",
+        "Studio",
+        "One bedroom apartment",
         "Two bedrooms apartment",
         "Three bedrooms apartment",
         "House/villa",
