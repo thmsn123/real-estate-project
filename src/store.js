@@ -15,7 +15,8 @@ firebase.initializeApp({
 export default new Vuex.Store({
     state: {
         authToken: null,
-        admin: null,
+        userID: null,
+        adminID: null,
         singlePost: [],
         singleComment: [],
         loadedSales: [],
@@ -58,7 +59,7 @@ export default new Vuex.Store({
             return state.authToken != null;
         },
         isAdmin(state) {
-            return state.admin != null && state.admin === 'JsqK1ja6uaQaVWcGvYkRBStvpIv1';
+            return state.userID != null && state.userID === state.adminID;
         }
     },
     mutations: {
@@ -141,8 +142,11 @@ export default new Vuex.Store({
         SET_TOKEN(state, token) {
             state.authToken = token;
         },
-        SET_ADMIN_STATUS(state, localID) {
-            state.admin = localID;
+        SET_USER_ID(state, localID) {
+            state.userID = localID;
+        },
+        SET_ADMIN_ID(state, adminID){
+            state.adminID = adminID;
         },
         CLEAR_TOKEN(state) {
             state.authToken = null;
@@ -221,6 +225,13 @@ export default new Vuex.Store({
                     };
                 });
         },
+        getAdminStatus(context) {
+            return axios.get(config.fbConfig.dbURL + "/admin.json")
+                .then(response => {
+                    context.commit("SET_ADMIN_ID", response.data._id);
+                })
+                .catch(e => console.log(e));
+        },
         authenticateUser(context, authData) {
             let authUrl = config.fbConfig.authDomain + "verifyPassword?key=" + config.fbConfig.apiIKey;
 
@@ -234,7 +245,8 @@ export default new Vuex.Store({
                 returnSecureToken: true
             }).then(result => {
                 context.commit('SET_TOKEN', result.data.idToken);
-                context.commit('SET_ADMIN_STATUS', result.data.localId);
+                context.commit('SET_USER_ID', result.data.localId);
+                context.dispatch('getAdminStatus');
                 localStorage.setItem("token", result.data.idToken);
                 localStorage.setItem("localId", result.data.localId);
                 localStorage.setItem('tokenExpiration', new Date().getTime() + +result.data.expiresIn * 1000);
@@ -256,7 +268,7 @@ export default new Vuex.Store({
                 context.commit('SET_TOKEN', token);
             }
             if (localId) {
-                context.commit('SET_ADMIN_STATUS', localId);
+                context.commit('SET_USER_ID', localId);
             }
 
             if (expirationDate) {

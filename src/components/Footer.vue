@@ -19,7 +19,7 @@
           <v-col class="light lighten-2 py-4 text-center black--text copyright" cols="12">
             &copy;
             {{ new Date().getFullYear() }} —
-            <strong>ttm2</strong>
+            <strong>ttomov</strong>
           </v-col>
         </v-row>
       </v-footer>
