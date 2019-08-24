@@ -7,11 +7,14 @@
       <section class="post">
         <h1 class="post-title">{{ currentNews.title }}</h1>
         <div class="post-details">
-          <img class="post-thumbnail" :src="currentNews.thumbnail" />
+          <img class="post-thumbnail" :src="currentNews.gallery[0]" />
         </div>
         <p class="post-content">{{ currentNews.content }}</p>
       </section>
-      <div class="post-author">Written by {{ currentNews.username }}</div>
+      <div class="post-author">
+        <span class="font-weight-bold">Source: </span>  
+        <a :href="currentNews.author" target="_blank">{{ currentNews.author }}</a>
+      </div>
     </div>
   </v-card>
 </template>

@@ -4,6 +4,7 @@ export default {
         projectName: "real-estate-project",
         projectID: "real-estate-project-e32ed",
         authDomain: "https://www.googleapis.com/identitytoolkit/v3/relyingparty/",
-        dbURL: "https://real-estate-project-e32ed.firebaseio.com/"
+        dbURL: "https://real-estate-project-e32ed.firebaseio.com/",
+        storageBucket: "gs://real-estate-project-e32ed.appspot.com/"
     }
 }

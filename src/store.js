@@ -2,8 +2,15 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import config from "../src/config"
+import firebase from "firebase";
 
 Vue.use(Vuex);
+firebase.initializeApp({
+    apiKey: config.fbConfig.apiIKey,
+    authDomain: config.fbConfig.authDomain,
+    databaseURL: config.fbConfig.dbURL.dbURL,
+    storageBucket: config.fbConfig.storageBucket
+});
 
 export default new Vuex.Store({
     state: {
@@ -13,6 +20,7 @@ export default new Vuex.Store({
         singleComment: [],
         loadedSales: [],
         loadedRentals: [],
+        loadedImages: [],
         loadedComments: [],
         loadedNews: []
     },
@@ -38,10 +46,13 @@ export default new Vuex.Store({
             return state.loadedRentals;
         },
         loadedNews(state) {
-            return state.loadedNews;
+            return state.loadedNews.reverse();
         },
         loadedComments(state) {
-            return state.loadedComments;
+            return state.loadedComments.reverse();
+        },
+        loadedImages(state) {
+            return state.loadedImages;
         },
         isAuthenticated(state) {
             return state.authToken != null;
@@ -124,11 +135,13 @@ export default new Vuex.Store({
                 }
             }
         },
+        SET_IMAGES(state, loadedImages) {
+            state.loadedImages = loadedImages;
+        },
         SET_TOKEN(state, token) {
             state.authToken = token;
         },
         SET_ADMIN_STATUS(state, localID) {
-            //hardcode admin id;
             state.admin = localID;
         },
         CLEAR_TOKEN(state) {
@@ -178,12 +191,22 @@ export default new Vuex.Store({
                 .then(result => {
                     return { status: result.status };
                 })
-                .catch(e => {
+                .catch(error => {
                     return {
                         status: error.response.status,
                         message: error.response.data.error.message
                     };
                 });
+        },
+        addFilesToStorage(context, images) {
+            return uploadFiles(images).then((imagesArr) => {
+                context.commit('SET_IMAGES', imagesArr);
+
+                return ({ status: 'ok' });
+            }).catch(err => {
+                console.log(err);
+            });
+
         },
         addComment(context, post) {
             return axios
@@ -191,7 +214,7 @@ export default new Vuex.Store({
                 .then(result => {
                     return { status: result.status };
                 })
-                .catch(e => {
+                .catch(error => {
                     return {
                         status: error.response.status,
                         message: error.response.data.error.message
@@ -252,3 +275,27 @@ export default new Vuex.Store({
         }
     }
 });
+
+async function uploadFiles(images) {
+    try {
+        let imagesArr = [];
+
+        for (var i = 0; i < images.files.length; i++) {
+            firebase
+                .storage()
+                .ref("/images/" + images.files[i].name)
+                .put(new Blob([images.files[i]], { type: "image/jpeg" }))
+                .then(snapshot => {
+                    snapshot.ref.getDownloadURL().then(url => {
+                        imagesArr.push(url);
+                    });
+                })
+                .catch(err => console.log(err));
+        }
+
+        return imagesArr;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}
