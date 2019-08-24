@@ -26,7 +26,7 @@ Contains a brief description about the company, contacts card with a map too.
 Contact form for users in order to communicate. The user needs to be logged in order to see that menu.
 
 ### Admin
-From the dropdown menu the administrator use Add New Post, where a new item in news, sales or rentals can be added by filling a form. On saving the post the needed get post action from vuex store is dispatched.
+From the dropdown menu the administrator use Add New Post, where a new item in news, sales or rentals can be added by filling a form. Uploaded attachments are added to firebase file storage. On saving the post the needed get post action from vuex store is dispatched.
 Another optin in Admin dropdown is Comments, where the administrator can read the posts submitted by the users from the contacts form. By clicking refresh a new request to the db is sent and respectfully the ui is updated.
 
 ### Auth  
