@@ -17,7 +17,7 @@
 import SignInRegister from "../../components/Auth/SignInOrRegister";
 
 export default {
-  name: "AdminAuthPage",
+  name: "Auth",
   layout: "admin",
   components: {
     SignInRegister

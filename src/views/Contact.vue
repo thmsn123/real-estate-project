@@ -41,6 +41,7 @@ import { mapActions } from "vuex";
 import { required, email } from "vuelidate/lib/validators";
 
 export default {
+  name: 'Contact',
   components: {
     MessageContainer
   },

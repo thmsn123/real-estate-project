@@ -9,6 +9,7 @@ import PostDetails from "../../components/Posts/PostDetails";
 import { mapGetters } from "vuex";
 
 export default {
+  name: 'SalesDetails',
   components: {
     PostDetails
   },

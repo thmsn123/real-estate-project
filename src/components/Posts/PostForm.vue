@@ -105,7 +105,7 @@ import { required, email } from "vuelidate/lib/validators";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "app",
+  name: "PostForm",
   data() {
     return {
       author: "",

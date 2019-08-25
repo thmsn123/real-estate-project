@@ -13,6 +13,7 @@ import PostForm from "../../components/Posts/PostForm";
 import { mapActions } from "vuex";
 
 export default {
+  name: 'NewPost',
   components: {
     PostForm,
     MessageContainer

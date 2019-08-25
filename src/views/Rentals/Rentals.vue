@@ -13,6 +13,7 @@ import PostList from "../../components/Posts/PostList";
 import { mapGetters } from "vuex";
 
 export default {
+  name: 'Rentals',
   components: {
     PostList
   },

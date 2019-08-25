@@ -35,6 +35,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  name: 'Comments',
   computed: {
     ...mapGetters(["loadedComments"])
   },
