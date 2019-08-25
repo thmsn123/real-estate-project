@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: 'MessageContainer',
   props: {
     response: {
       type: Object,

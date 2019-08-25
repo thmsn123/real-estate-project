@@ -25,6 +25,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+  name: 'CommentsDetails',
   computed: {
     ...mapGetters(["currentComment"]),
     comment() {

@@ -36,6 +36,7 @@ import { required, minLength, alphaNum, email } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
 
 export default {
+  name: 'SignInOrRegister',
   props: {
     isLogin: {
       type: Boolean,

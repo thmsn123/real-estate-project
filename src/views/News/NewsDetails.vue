@@ -23,6 +23,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+  name: 'NewsDetails',
   computed: {
     ...mapGetters(["currentPost"]),
     currentNews() {

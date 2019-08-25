@@ -17,8 +17,12 @@
             <div class="mobile-phone">
               <span class="font-weight-bold">Mob:</span> +359 8123456
             </div>
-            <div class="e-mail"><span class="font-weight-bold">E-mail:</span> sales@kavarnarealestate.com</div>
-            <div class="address"><span class="font-weight-bold">Address:</span> 12, Dobrotitza, floor 2, office 10, Kavarna</div>
+            <div class="e-mail">
+              <span class="font-weight-bold">E-mail:</span> sales@kavarnarealestate.com
+            </div>
+            <div class="address">
+              <span class="font-weight-bold">Address:</span> 12, Dobrotitza, floor 2, office 10, Kavarna
+            </div>
           </div>
         </div>
         <div>
@@ -39,6 +43,7 @@
 <script>
 import Carousel from "../components/Carousel";
 export default {
+  name: "AboutUs",
   components: {
     Carousel
   }
