@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="card-wrapper">
     <div class="text-center container my-3 news">
       <div class="posts">
         <post-list :loadedPosts="loadedNews"></post-list>
@@ -27,5 +27,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.card-wrapper{
+  margin-top: 100px;
+  margin-bottom: 20px;
 }
 </style>
