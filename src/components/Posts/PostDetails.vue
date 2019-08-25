@@ -45,7 +45,7 @@
         <p class="post-content">{{ currentPost.content }}</p>
       </section>
       <section class="post-feedback">
-        <router-link v-if="isAdmin" :to="{path: '/contact'}">Contact us</router-link>
+        <router-link v-if="isAuthenticated" :to="{path: '/contact'}">Contact us</router-link>
       </section>
     </v-card>
   </div>
@@ -77,7 +77,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["isAdmin"])
+    ...mapGetters(["isAuthenticated"])
   }
 };
 </script>
