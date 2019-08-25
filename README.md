@@ -33,9 +33,8 @@ Another optin in Admin dropdown is Comments, where the administrator can read th
 User may log in or register in that menu. In case of a wrong password or email is displayed a message.
 
 ## HOSTED AT:
-```
+
 https://real-estate-project-e32ed.firebaseapp.com/
-```
 
 ## Project setup
 ```
