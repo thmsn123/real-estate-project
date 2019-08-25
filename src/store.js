@@ -145,7 +145,7 @@ export default new Vuex.Store({
         SET_USER_ID(state, localID) {
             state.userID = localID;
         },
-        SET_ADMIN_ID(state, adminID){
+        SET_ADMIN_ID(state, adminID) {
             state.adminID = adminID;
         },
         CLEAR_TOKEN(state) {
@@ -269,6 +269,7 @@ export default new Vuex.Store({
             }
             if (localId) {
                 context.commit('SET_USER_ID', localId);
+                context.dispatch('getAdminStatus');
             }
 
             if (expirationDate) {
