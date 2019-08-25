@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="card-wrapper">
     <div class="container text-center my-3">
       <div class="posts">
         <post-list :loadedPosts="loadedSales"></post-list>
@@ -30,5 +30,9 @@ export default {
 }
 .container {
   min-height: 450px;
+}
+.card-wrapper{
+  margin-top: 100px;
+  margin-bottom: 20px;
 }
 </style>
