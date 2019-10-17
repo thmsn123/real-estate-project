@@ -7,7 +7,7 @@
           <router-link color="white" text rounded class="my-2" :to="{path: '/news'}">News</router-link>
           <router-link color="white" text rounded class="my-2" :to="{path: '/rentals'}">Rentals</router-link>
           <router-link color="white" text rounded class="my-2" :to="{path: '/sales'}">Sales</router-link>
-          <router-link color="white" text rounded class="my-2" :to="{path: '/aboutUs'}">About Us</router-link>
+          <router-link color="white" text rounded class="my-2" :to="{path: '/info'}">About Us</router-link>
           <router-link
             v-if="isAdmin"
             color="white"

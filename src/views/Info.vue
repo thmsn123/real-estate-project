@@ -43,7 +43,7 @@
 <script>
 import Carousel from "../components/Carousel";
 export default {
-  name: "AboutUs",
+  name: "Info",
   components: {
     Carousel
   }

@@ -1,10 +1,10 @@
 export default {
     fbConfig: {
-        apiIKey: "AIzaSyDHidM-Bk0JA3eWcQ2M8iyXK4wqUWGHwmA",
-        projectName: "real-estate-project",
-        projectID: "real-estate-project-e32ed",
+        apiIKey: "AIzaSyCwGTLgFgcSR9Gs9NszKvN83WEL8sW2E1s",
+        projectName: "zu-hause-in-bulgarien",
+        projectID: "zu-hause-in-bulgarien",
         authDomain: "https://www.googleapis.com/identitytoolkit/v3/relyingparty/",
-        dbURL: "https://real-estate-project-e32ed.firebaseio.com/",
-        storageBucket: "gs://real-estate-project-e32ed.appspot.com/"
+        dbURL: "https://zu-hause-in-bulgarien.firebaseio.com/",
+        storageBucket: "gs://zu-hause-in-bulgarien.appspot.com"
     }
 }

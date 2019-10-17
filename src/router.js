@@ -7,7 +7,7 @@ import Rentals from "./views/Rentals/Rentals";
 import RentalsDetails from './views/Rentals/RentalsDetails'
 import Sales from "./views/Sales/Sales";
 import SalesDetails from "./views/Sales/SalesDetails";
-import AboutUs from "./views/AboutUs";
+import Info from "./views/Info";
 import Contact from "./views/Contact";
 import Auth from "./views/Admin/Auth"
 import NewPost from "./views/Admin/NewPost"
@@ -79,11 +79,11 @@ const router = new Router({
       }
     },
     {
-      path: "/aboutus",
-      name: "aboutus",
-      component: AboutUs,
+      path: "/info",
+      name: "info",
+      component: Info,
       meta: {
-        title: "About Us"
+        title: "Info"
       }
     },
     {
@@ -145,11 +145,11 @@ router.beforeEach((to, from, next) => {
       next('/');
     }
   }
-  if (to.fullPath === '/contact') {
-    if (!store.getters.isAuthenticated) {
-      next('/auth');
-    }
-  }
+  // if (to.fullPath === '/contact') {
+  //   if (!store.getters.isAuthenticated) {
+  //     next('/auth');
+  //   }
+  // }
   if (to.fullPath === '/newpost') {
     if (!store.getters.isAuthenticated || (store.getters.isAuthenticated && !store.getters.isAdmin)) {
       next('/auth');

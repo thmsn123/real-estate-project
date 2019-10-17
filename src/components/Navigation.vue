@@ -16,42 +16,61 @@
         <b-nav-item>
           <router-link class="nav-link" active-class="active" :to="{path: '/sales'}">Sales</router-link>
         </b-nav-item>
-        <b-nav-item>
-          <router-link class="nav-link" active-class="active" :to="{path: '/aboutUs'}">About Us</router-link>
-        </b-nav-item>
+        
+        <b-nav-item-dropdown
+          id="my-nav-dropdown"
+          text="Information"
+          class="nav-link"
+          right
+        >
+          <b-dropdown-item>
+            <router-link class="nav-link" :to="{path: '/howtobuy'}">How to buy?</router-link>
+          </b-dropdown-item>
+          <b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item>
+            <router-link class="nav-link" :to="{path: '/howtobuy'}">Purchase Expenses</router-link>
+          </b-dropdown-item>
+          <b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item>
+            <router-link class="nav-link" :to="{path: '/howtobuy'}">Transfers</router-link>
+          </b-dropdown-item>
+          <b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item>
+            <router-link class="nav-link" :to="{path: '/howtobuy'}">About Kavarna</router-link>
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+
         <b-nav-item>
           <router-link
-            v-if="isAuthenticated"
             class="nav-link"
             active-class="active"
             to="/contact"
           >Contact</router-link>
         </b-nav-item>
+        <b-nav-item-dropdown
+          v-if="isAdmin && isAuthenticated"
+          id="my-nav-dropdown"
+          text="Admin"
+          class="nav-link"
+          right
+        >
+          <b-dropdown-item>
+            <router-link class="nav-link" :to="{path: '/newpost'}">Add New Post</router-link>
+          </b-dropdown-item>
+          <b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item>
+            <router-link class="nav-link" :to="{path: '/comments'}">Comments</router-link>
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+        <b-nav-item class="nav-link" v-if="isAuthenticated" @click="logOutUser">Log Out</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <template v-if="isAuthenticated">
-          <b-nav-item-dropdown
-            v-if="isAdmin"
-            id="my-nav-dropdown"
-            text="Admin"
-            toggle-class="nav-link-custom"
-            right
-          >
-            <b-dropdown-item>
-              <router-link class="nav-link" :to="{path: '/newpost'}">Add New Post</router-link>
-            </b-dropdown-item>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item>
-              <router-link class="nav-link" :to="{path: '/comments'}">Comments</router-link>
-            </b-dropdown-item>
-          </b-nav-item-dropdown>
-          <b-nav-item @click="logOutUser">Log Out</b-nav-item>
-        </template>
-        <template v-else>
+        <img :src="logo" alt="logo" height="100" width="160" />
+        <!-- <template v-else>
           <router-link class="nav-link" active-class="active" :to="{path: '/auth'}">Login/Sign Up</router-link>
-        </template>
+        </template>-->
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -59,6 +78,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import logo from "../assets/logo.png";
 
 export default {
   name: "NavBar",
@@ -66,7 +86,8 @@ export default {
     return {
       imgProps: {
         height: 200
-      }
+      },
+      logo: logo
     };
   },
   computed: {
@@ -74,10 +95,10 @@ export default {
   },
   methods: {
     ...mapActions(["logOut"]),
-    logOutUser(){
+    logOutUser() {
       this.logOut();
       //this is used in order to set bootstrap active class in home page only;
-      this.$router.push('/');
+      this.$router.push("/");
     }
   }
 };

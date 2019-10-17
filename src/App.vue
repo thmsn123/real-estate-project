@@ -13,9 +13,9 @@
         <div class="container h-100">
           <div class="row h-100 align-items-center">
             <div class="col-12 text-center page-content">
-              <transition name="bounce">
                 <router-view></router-view>
-              </transition>
+              <!-- <transition name="bounce">
+              </transition> -->
             </div>
           </div>
         </div>

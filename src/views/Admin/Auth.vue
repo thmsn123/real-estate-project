@@ -5,9 +5,9 @@
         <b-tab title="Log In" active>
           <sign-in-register :isLogin="true"></sign-in-register>
         </b-tab>
-        <b-tab title="Sign Up">
+        <!-- <b-tab title="Sign Up">
           <sign-in-register :isLogin="false"></sign-in-register>
-        </b-tab>
+        </b-tab> -->
       </b-tabs>
     </div>
   </div>

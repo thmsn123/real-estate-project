@@ -1,10 +1,10 @@
 <template>
   <div class="my-3 text-center container">
     <h1 class="title">ARE YOU READY TO FIND YOUR NEW HOME?</h1>
-    <h3>Welcome to Real Estate Properties!</h3>
+    <h3>Welcome!</h3>
     <p>Here you can find a wide variety of apartments, houses, villas, properties and etc. for rent and sale.</p>
     <p>Please feel free to contact us!</p>
-    <router-link class="btn btn-primary" :to="{path: '/aboutus'}">Read More</router-link>
+    <router-link class="btn btn-primary" :to="{path: '/info'}">Read More</router-link>
   </div>
 </template>
 
