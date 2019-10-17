@@ -35,6 +35,7 @@ User may log in or register in that menu. In case of a wrong password or email i
 ## HOSTED AT:
 
 https://real-estate-project-e32ed.firebaseapp.com/
+https://zuhause-in-bulgarien.de/
 
 ## Project setup
 ```
