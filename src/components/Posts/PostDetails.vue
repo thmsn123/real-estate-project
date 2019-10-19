@@ -2,7 +2,7 @@
   <div>
     <v-card class="card">
       <router-link :to="{path: getParentRoute()}">
-        <v-btn medium dark absolute top left>Back</v-btn>
+        <v-btn medium dark absolute top left>Zurück</v-btn>
       </router-link>
       <v-toolbar-title class="title">{{ currentPost.title }}</v-toolbar-title>
       <img
@@ -17,25 +17,25 @@
         <v-list class="mx-auto" max-width="400" tile>
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title>Price</v-list-item-title>
+              <v-list-item-title>Preis</v-list-item-title>
               <v-list-item-subtitle>{{currentPost.price | toEuro}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title>Property type</v-list-item-title>
+              <v-list-item-title>Beschreibung</v-list-item-title>
               <v-list-item-subtitle>{{currentPost.propertyType}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title>Location</v-list-item-title>
+              <v-list-item-title>Lage</v-list-item-title>
               <v-list-item-subtitle>{{currentPost.location}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title>Construction year</v-list-item-title>
+              <v-list-item-title>Baujahr</v-list-item-title>
               <v-list-item-subtitle>{{currentPost.constructionYear}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -45,7 +45,7 @@
         <p class="post-content">{{ currentPost.content }}</p>
       </section>
       <section class="post-feedback">
-        <router-link v-if="isAuthenticated" :to="{path: '/contact'}">Contact us</router-link>
+        <router-link :to="{path: '/contact'}">Kontakt</router-link>
       </section>
     </v-card>
   </div>
@@ -95,6 +95,8 @@ export default {
 }
 .card {
   padding: 20px;
+  margin-top: 100px;
+  margin-bottom: 20px;
 }
 .title {
   padding: 10px;

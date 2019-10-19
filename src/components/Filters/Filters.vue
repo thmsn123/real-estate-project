@@ -1,6 +1,6 @@
 <template>
   <div class="filtersWrapper">
-    <span class="filterText">Filter by:</span>
+    <span class="filterText">Filter:</span>
     <popper
       class="popperWrapper"
       trigger="click"
@@ -20,7 +20,7 @@
           </div>
         </v-btn-toggle>
       </div>
-      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Type</v-btn>
+      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Immobilientyp</v-btn>
     </popper>
     <popper
       v-if="this.$router.currentRoute.name === 'sales'"
@@ -42,7 +42,7 @@
           </div>
         </v-btn-toggle>
       </div>
-      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Price</v-btn>
+      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Preis</v-btn>
     </popper>
     <popper
       v-else
@@ -85,7 +85,7 @@
           </div>
         </v-btn-toggle>
       </div>
-      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Location</v-btn>
+      <v-btn small class="standardFiltersButton sortersBtn" text slot="reference">Lage</v-btn>
     </popper>
     <div style="margin-left: 5px">
       <span></span>
@@ -111,31 +111,33 @@ export default {
     return {
       types: [
         "Studio",
-        "One bedroom apartment",
-        "Two bedrooms apartment",
-        "Three bedrooms apartment",
-        "House/villa",
-        "Rural property"
+        "Ein Zimmerwohnung",
+        "Zwei Zimmerwohnung",
+        "Drei Zimmerwohnung",
+        "Haus",
+        "Haus Dorflage"
       ],
       locations: [
         "Kavarna",
         "Balchik",
         "Bulgarevo",
         "Mogilishte",
+        "Topola",
+        "Bozhuretz",
         "Kamen Bryag",
         "Tyulenovo"
       ],
       salesPriceRanges: [
-        "to 20000",
-        "from 20000 to 50000",
-        "from 50000 to 100000",
-        "over 10000"
+        "von 20000",
+        "von 20000 bis 50000",
+        "von 50000 bis 100000",
+        "über 10000"
       ],
       rentalsPriceRanges: [
-        "to 100",
-        "from 100 to 500",
-        "from 500 to 1000",
-        "over 1000"
+        "von 100",
+        "von 100 bis 500",
+        "von 500 bis 1000",
+        "über 1000"
       ],
       sortOptions: ["Price", "Distance", "Date"],
       selectedFilterProp: ""

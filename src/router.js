@@ -7,7 +7,11 @@ import Rentals from "./views/Rentals/Rentals";
 import RentalsDetails from './views/Rentals/RentalsDetails'
 import Sales from "./views/Sales/Sales";
 import SalesDetails from "./views/Sales/SalesDetails";
-import Info from "./views/Info";
+import Aboutus from "./views/Aboutus";
+import BgNews from "./views/Good to know/BgNews";
+import RentalsCost from "./views/Good to know/RentalsCost";
+import SalesCost from "./views/Good to know/SalesCost";
+import Expenses from "./views/Good to know/Expenses";
 import Contact from "./views/Contact";
 import Auth from "./views/Admin/Auth"
 import NewPost from "./views/Admin/NewPost"
@@ -27,7 +31,7 @@ const router = new Router({
       name: "home",
       component: Home,
       meta: {
-        title: "Home"
+        title: "Startseite"
       }
     },
     {
@@ -35,7 +39,7 @@ const router = new Router({
       name: "news",
       component: News,
       meta: {
-        title: "News"
+        title: "Allgemeines"
       }
     },
     {
@@ -43,7 +47,7 @@ const router = new Router({
       name: "rentals",
       component: Rentals,
       meta: {
-        title: "Rentals"
+        title: "Zu mieten"
       }
     },
     {
@@ -51,7 +55,7 @@ const router = new Router({
       name: "rentalsdetails",
       component: RentalsDetails,
       meta: {
-        title: "Rentals Details"
+        title: "Zu mieten"
       }
     },
     {
@@ -59,7 +63,7 @@ const router = new Router({
       name: "sales",
       component: Sales,
       meta: {
-        title: "Sales"
+        title: "Zu kaufen"
       }
     },
     {
@@ -67,7 +71,7 @@ const router = new Router({
       name: "salesdetails",
       component: SalesDetails,
       meta: {
-        title: "Sales Details"
+        title: "Zu kaufen"
       }
     },
     {
@@ -75,15 +79,51 @@ const router = new Router({
       name: "newsdetails",
       component: NewsDetails,
       meta: {
-        title: "News Details"
+        title: "Allgemeines"
       }
     },
     {
-      path: "/info",
-      name: "info",
-      component: Info,
+      path: "/bgnews",
+      name: "bgnews",
+      component: BgNews,
       meta: {
-        title: "Info"
+        title: "Allgemeines zu Bulgarien"
+      }
+    },
+
+    {
+      path: "/rentalscost",
+      name: "rentalscost",
+      component: RentalsCost,
+      meta: {
+        title: "Kosten für eine Mietwohnung"
+      }
+    },
+    {
+      path: "/salescost",
+      name: "salescost",
+      component: SalesCost,
+      meta: {
+        title: "Kosten für ein Haus in Bulgarien"
+      }
+    },
+    {
+      path: "/expenses",
+      name: "expenses",
+      component: Expenses,
+      meta: {
+        title: "Taxipreise, Kosten für Lebensmittel"
+      }
+    },
+
+    
+
+    {
+      path: "/aboutus",
+      name: "aboutus",
+      component: Aboutus,
+      meta: {
+        title: "Über uns"
       }
     },
     {
@@ -91,7 +131,7 @@ const router = new Router({
       name: "contact",
       component: Contact,
       meta: {
-        title: "Contact"
+        title: "Kontakt"
       }
     },
     {

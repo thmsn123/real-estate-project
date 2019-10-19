@@ -33,18 +33,18 @@
       <input type="text" v-model.trim="price" value="price" class="form-control" />
     </div>
     <div class="form-group text-left" v-if="postType !== 'news'">
-      <label for="propertyType">Property type:</label>
+      <label for="propertyType">Immobilientyp:</label>
       <select id="propertyType" v-model="propertyType" class="form-control">
         <option value="Studio">Studio</option>
-        <option value="One bedroom apartment">One bedroom apartment</option>
-        <option value="Two bedrooms apartment">Two bedrooms apartment</option>
-        <option value="Three bedrooms apartment">Three bedrooms apartment</option>
-        <option value="House/villa">House/villa</option>
-        <option value="Rural property">Rural property</option>
+        <option value="Ein Zimmerwohnung">Ein Zimmerwohnung</option>
+        <option value="Zwei Zimmerwohnung">Zwei Zimmerwohnung</option>
+        <option value="Drei Zimmerwohnung">Drei Zimmerwohnung</option>
+        <option value="Haus">Haus</option>
+        <option value="Haus Dorflage">Haus Dorflage</option>
       </select>
     </div>
     <div class="form-group text-left" v-if="postType !== 'news'">
-      <label for="location">Location:</label>
+      <label for="location">Lage:</label>
       <select id="location" v-model="location" class="form-control">
         <option value="Kavarna">Kavarna</option>
         <option value="Balchik">Balchik</option>
@@ -52,6 +52,8 @@
         <option value="Mogilishte">Mogilishte</option>
         <option value="Kamen Bryag">Kamen Bryag</option>
         <option value="Tyulenovo">Tyulenovo</option>
+        <option value="Topola">Topola</option>
+        <option value="Bozhuretz">Bozhuretz</option>
       </select>
     </div>
     <div class="form-group text-left" v-if="postType !== 'news'">
