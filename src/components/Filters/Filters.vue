@@ -118,6 +118,7 @@ export default {
         "Haus Dorflage"
       ],
       locations: [
+        "Varna",
         "Kavarna",
         "Balchik",
         "Bulgarevo",

@@ -50,11 +50,11 @@
           right
         >
           <b-dropdown-item>
-            <router-link class="nav-link" :to="{path: '/newpost'}">Add New Post</router-link>
+            <router-link class="nav-link" :to="{path: '/newpost'}">Eingabe Object</router-link>
           </b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
           <b-dropdown-item>
-            <router-link class="nav-link" :to="{path: '/comments'}">Comments</router-link>
+            <router-link class="nav-link" :to="{path: '/comments'}">Post</router-link>
           </b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item class="nav-link" v-if="isAuthenticated" @click="logOutUser">Log Out</b-nav-item>
