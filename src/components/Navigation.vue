@@ -5,47 +5,42 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item>
-          <router-link class="nav-link" active-class="active" :to="{path: '/'}" exact>Home</router-link>
+          <router-link class="nav-link" active-class="active" :to="{path: '/'}" exact>Startseite</router-link>
+        </b-nav-item>
+        <!-- <b-nav-item>
+          <router-link class="nav-link" active-class="active" :to="{path: '/news'}">Allgemeines</router-link>
+        </b-nav-item> -->
+        <b-nav-item>
+          <router-link class="nav-link" active-class="active" :to="{path: '/rentals'}">Zu mieten</router-link>
         </b-nav-item>
         <b-nav-item>
-          <router-link class="nav-link" active-class="active" :to="{path: '/news'}">News</router-link>
+          <router-link class="nav-link" active-class="active" :to="{path: '/sales'}">Zu kaufen</router-link>
         </b-nav-item>
-        <b-nav-item>
-          <router-link class="nav-link" active-class="active" :to="{path: '/rentals'}">Rentals</router-link>
-        </b-nav-item>
-        <b-nav-item>
-          <router-link class="nav-link" active-class="active" :to="{path: '/sales'}">Sales</router-link>
-        </b-nav-item>
-        
-        <b-nav-item-dropdown
-          id="my-nav-dropdown"
-          text="Information"
-          class="nav-link"
-          right
-        >
+        <b-nav-item-dropdown id="my-nav-dropdown" text="Gut zu wissen" class="nav-link" right>
           <b-dropdown-item>
-            <router-link class="nav-link" :to="{path: '/howtobuy'}">How to buy?</router-link>
+            <router-link class="nav-link" :to="{path: '/bgnews'}">Allgemeines zu Bulgarien</router-link>
           </b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
           <b-dropdown-item>
-            <router-link class="nav-link" :to="{path: '/howtobuy'}">Purchase Expenses</router-link>
+            <router-link class="nav-link" :to="{path: '/rentalscost'}">Kosten für eine Mietwohnung</router-link>
           </b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
           <b-dropdown-item>
-            <router-link class="nav-link" :to="{path: '/howtobuy'}">Transfers</router-link>
+            <router-link class="nav-link" :to="{path: '/salescost'}">Kosten für ein Haus in Bulgarien</router-link>
           </b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
           <b-dropdown-item>
-            <router-link class="nav-link" :to="{path: '/howtobuy'}">About Kavarna</router-link>
+            <router-link
+              class="nav-link"
+              :to="{path: '/expenses'}"
+            >Taxipreise, Kosten für Lebensmittel</router-link>
           </b-dropdown-item>
         </b-nav-item-dropdown>
-
         <b-nav-item>
-          <router-link
-            class="nav-link"
-            active-class="active"
-            to="/contact"
-          >Contact</router-link>
+          <router-link class="nav-link" active-class="active" :to="{path: '/aboutus'}">Über uns</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link class="nav-link" active-class="active" to="/contact">Kontakt</router-link>
         </b-nav-item>
         <b-nav-item-dropdown
           v-if="isAdmin && isAuthenticated"
@@ -55,11 +50,11 @@
           right
         >
           <b-dropdown-item>
-            <router-link class="nav-link" :to="{path: '/newpost'}">Add New Post</router-link>
+            <router-link class="nav-link" :to="{path: '/newpost'}">Eingabe Object</router-link>
           </b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
           <b-dropdown-item>
-            <router-link class="nav-link" :to="{path: '/comments'}">Comments</router-link>
+            <router-link class="nav-link" :to="{path: '/comments'}">Post</router-link>
           </b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item class="nav-link" v-if="isAuthenticated" @click="logOutUser">Log Out</b-nav-item>
@@ -105,9 +100,9 @@ export default {
 </script>
 
 <style>
-.navbar {
+/* .navbar {
   opacity: 0.8;
-}
+} */
 .navbar-collapse.collapse {
   font-size: 20px;
   line-height: 30px;

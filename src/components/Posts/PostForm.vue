@@ -1,8 +1,7 @@
 <template>
   <form class="form-wrapper" @submit.prevent="onSave">
-    <h3>Add new post</h3>
     <div class="form-group text-left">
-      <label for="user-name">Author name:</label>
+      <label for="user-name">Name:</label>
       <input
         type="text"
         v-model.trim="$v.author.$model"
@@ -12,54 +11,57 @@
       <p class="alert alert-danger" v-if="$v.author.$error">Name is not valid!</p>
     </div>
     <div class="form-group text-left">
-      <label for="postType">Post type:</label>
+      <label for="postType">Typ immobilie:</label>
       <select
         id="postType"
         v-model="$v.postType.$model"
         :class="['form-control', {'alert-danger' : $v.postType.$error}]"
       >
-        <option value="news">News post</option>
-        <option value="sales">Sale post</option>
-        <option value="rentals">Rentals post</option>
+        <option value="news">Allgemeines</option>
+        <option value="sales">Zu verkaufen</option>
+        <option value="rentals">Zu mieten</option>
       </select>
       <p class="alert alert-danger" v-if="$v.postType.$error">Please choose an option!</p>
     </div>
     <div class="form-group text-left">
-      <label for="title">Title:</label>
+      <label for="title">Beschreibung:</label>
       <input type="text" v-model.trim="title" value="title" class="form-control" />
     </div>
     <div class="form-group text-left" v-if="postType !== 'news'">
-      <label for="price">Price:</label>
+      <label for="price">Preis:</label>
       <input type="text" v-model.trim="price" value="price" class="form-control" />
     </div>
     <div class="form-group text-left" v-if="postType !== 'news'">
-      <label for="propertyType">Property type:</label>
+      <label for="propertyType">Immobilientyp:</label>
       <select id="propertyType" v-model="propertyType" class="form-control">
         <option value="Studio">Studio</option>
-        <option value="One bedroom apartment">One bedroom apartment</option>
-        <option value="Two bedrooms apartment">Two bedrooms apartment</option>
-        <option value="Three bedrooms apartment">Three bedrooms apartment</option>
-        <option value="House/villa">House/villa</option>
-        <option value="Rural property">Rural property</option>
+        <option value="Ein Zimmerwohnung">Ein Zimmerwohnung</option>
+        <option value="Zwei Zimmerwohnung">Zwei Zimmerwohnung</option>
+        <option value="Drei Zimmerwohnung">Drei Zimmerwohnung</option>
+        <option value="Haus">Haus</option>
+        <option value="Haus Dorflage">Haus Dorflage</option>
       </select>
     </div>
     <div class="form-group text-left" v-if="postType !== 'news'">
-      <label for="location">Location:</label>
+      <label for="location">Lage:</label>
       <select id="location" v-model="location" class="form-control">
+        <option value="Varna">Varna</option>
         <option value="Kavarna">Kavarna</option>
         <option value="Balchik">Balchik</option>
         <option value="Bulgarevo">Bulgarevo</option>
         <option value="Mogilishte">Mogilishte</option>
         <option value="Kamen Bryag">Kamen Bryag</option>
         <option value="Tyulenovo">Tyulenovo</option>
+        <option value="Topola">Topola</option>
+        <option value="Bozhuretz">Bozhuretz</option>
       </select>
     </div>
     <div class="form-group text-left" v-if="postType !== 'news'">
-      <label for="propertySize">Property size:</label>
+      <label for="propertySize">Fläche:</label>
       <input type="text" v-model.trim="propertySize" value="propertySize" class="form-control" />
     </div>
     <div class="form-group text-left" v-if="postType !== 'news'">
-      <label for="constructionYear">Year of construction:</label>
+      <label for="constructionYear">Baujahr:</label>
       <input
         type="text"
         v-model.trim="constructionYear"
@@ -67,7 +69,7 @@
         class="form-control"
       />
     </div>
-    <b-form-group label="Add images to gallery:" label-for="gallery" class="text-left">
+    <b-form-group label="Bilder:" label-for="gallery" class="text-left">
       <b-form-file
         id="gallery"
         v-model="gallery"
@@ -87,7 +89,7 @@
       </div>
     </b-form-group>
     <div class="form-group text-left">
-      <label for="content">Content:</label>
+      <label for="content">Text:</label>
       <br />
       <textarea v-model="content" id="content" rows="5" class="form-control"></textarea>
     </div>

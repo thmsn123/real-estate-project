@@ -139,4 +139,8 @@ body::-webkit-scrollbar,
   height: 2px;
   background: black;
 }
+
+.v-application--wrap {
+  min-height: 0px !important;
+}
 </style>

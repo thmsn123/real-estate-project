@@ -3,23 +3,16 @@
     <v-app>
       <v-footer color="light lighten-1" padless>
         <v-row class="footer-nav" justify="center" no-gutters>
-          <router-link color="white" text rounded class="my-2" :to="{path: '/'}">Home</router-link>
-          <router-link color="white" text rounded class="my-2" :to="{path: '/news'}">News</router-link>
-          <router-link color="white" text rounded class="my-2" :to="{path: '/rentals'}">Rentals</router-link>
-          <router-link color="white" text rounded class="my-2" :to="{path: '/sales'}">Sales</router-link>
-          <router-link color="white" text rounded class="my-2" :to="{path: '/info'}">About Us</router-link>
-          <router-link
-            v-if="isAdmin"
-            color="white"
-            text
-            rounded
-            class="my-2"
-            :to="{path: '/contact'}"
-          >Contact</router-link>
+          <router-link color="white" text rounded class="my-2" :to="{path: '/'}">Startseite</router-link>
+          <!-- <router-link color="white" text rounded class="my-2" :to="{path: '/news'}">Allgemeines</router-link> -->
+          <router-link color="white" text rounded class="my-2" :to="{path: '/rentals'}">Zu mieten</router-link>
+          <router-link color="white" text rounded class="my-2" :to="{path: '/sales'}">Zu kaufen</router-link>
+          <router-link color="white" text rounded class="my-2" :to="{path: '/aboutus'}">Über uns</router-link>
+          <router-link color="white" text rounded class="my-2" :to="{path: '/contact'}">Kontakt</router-link>
           <v-col class="light lighten-2 py-4 text-center black--text copyright" cols="12">
             &copy;
             {{ new Date().getFullYear() }} —
-            <strong>ttomov</strong>
+            <strong>Zuhause in Bulgarien</strong>
           </v-col>
         </v-row>
       </v-footer>
@@ -31,7 +24,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: 'Footer',
+  name: "Footer",
   computed: {
     ...mapGetters(["isAdmin"])
   }
@@ -54,7 +47,7 @@ a:hover {
   line-height: 20px;
   font-weight: 700;
 }
-.copyright{
+.copyright {
   font-size: 15px;
   line-height: 15px;
 }

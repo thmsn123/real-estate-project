@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <router-link :to="{path: '/news'}">
-      <v-btn medium dark absolute top left>Back</v-btn>
+      <v-btn medium dark absolute top left>Zurück</v-btn>
     </router-link>
     <div class="single-post-page container my-3" v-if="currentNews">
       <section class="post">
@@ -11,10 +11,10 @@
         </div>
         <p class="post-content">{{ currentNews.content }}</p>
       </section>
-      <div class="post-author">
+      <!-- <div class="post-author">
         <span class="font-weight-bold">Source: </span>  
         <a :href="currentNews.author" target="_blank">{{ currentNews.author }}</a>
-      </div>
+      </div> -->
     </div>
   </v-card>
 </template>

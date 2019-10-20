@@ -3,7 +3,7 @@
     <message-container :response="response"></message-container>
     <div class="container p-5">
       <form class="form-wrapper" @submit.prevent="onSubmit">
-        <h3>Contact us</h3>
+        <h3>Kontakt</h3>
         <div class="form-group text-left">
           <label for="user-name">Name:</label>
           <input
@@ -22,14 +22,14 @@
             id="email"
             :class="['form-control', {'alert-danger' : $v.email.$error}]"
           />
-          <p class="alert alert-danger" v-if="$v.email.$error">Email is not valid!</p>
+          <p class="alert alert-danger" v-if="$v.email.$error">Email ist nicht gültig!</p>
         </div>
         <div class="form-group text-left">
-          <label for="description">Description</label>
+          <label for="description">Text:</label>
           <br />
           <textarea v-model="description" id="description" rows="5" class="form-control"></textarea>
         </div>
-        <button :disabled="$v.$invalid" class="btn btn-primary">Submit</button>
+        <button :disabled="$v.$invalid" class="btn btn-primary">Senden</button>
       </form>
     </div>
   </v-card>
