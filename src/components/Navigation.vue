@@ -100,9 +100,9 @@ export default {
 </script>
 
 <style>
-.navbar {
+/* .navbar {
   opacity: 0.8;
-}
+} */
 .navbar-collapse.collapse {
   font-size: 20px;
   line-height: 30px;
