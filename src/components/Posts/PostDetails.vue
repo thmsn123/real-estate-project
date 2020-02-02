@@ -17,6 +17,12 @@
         <v-list class="mx-auto" max-width="400" tile>
           <v-list-item two-line>
             <v-list-item-content>
+              <v-list-item-title>Angebot</v-list-item-title>
+              <v-list-item-subtitle>{{'000' + currentPost.number}}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item two-line>
+            <v-list-item-content>
               <v-list-item-title>Preis</v-list-item-title>
               <v-list-item-subtitle>{{currentPost.price | toEuro}}</v-list-item-subtitle>
             </v-list-item-content>
