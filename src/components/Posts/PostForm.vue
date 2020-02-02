@@ -125,7 +125,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["loadedImages"])
+    ...mapGetters(["loadedImages", "loadedSales", "loadedRentals"])
   },
   methods: {
     ...mapActions(["addFilesToStorage"]),
@@ -135,6 +135,13 @@ export default {
           this.uploadMessage = "The attachments were uploaded!";
         }
       });
+    },
+    getNumber() {
+      if (this.postType === "sales") {
+        return this.loadedSales.length + 1;
+      } else if (this.postType === "rentals") {
+        return this.loadedRentals.length + 1;
+      }
     },
     onSave() {
       let postData = {
@@ -148,6 +155,7 @@ export default {
         price: this.price,
         content: this.content,
         preview: this.preview,
+        number: this.getNumber(),
         date: new Date()
       };
 
