@@ -1,30 +1,35 @@
 <template>
   <div id="app">
-    <nprogress-container></nprogress-container>
+    <div v-if="!isMobile">
+      <nprogress-container></nprogress-container>
 
-    <nav-bar></nav-bar>
+      <nav-bar></nav-bar>
 
-    <div id="main">
-      <!-- Main Content -->
-      <div
-        class="main-content"
-        :style="{ 'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(' + backgroundImage + ')' }"
-      >
-        <div class="container h-100">
-          <div class="row h-100 align-items-center">
-            <div class="col-12 text-center page-content">
+      <div id="main">
+        <!-- Main Content -->
+        <div
+          class="main-content"
+          :style="{ 'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(' + backgroundImage + ')' }"
+        >
+          <div class="container h-100">
+            <div class="row h-100 align-items-center">
+              <div class="col-12 text-center page-content">
                 <router-view></router-view>
-              <!-- <transition name="bounce">
-              </transition> -->
+                <!-- <transition name="bounce">
+                </transition>-->
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- Footer Content -->
+      <footer>
+        <nav-footer></nav-footer>
+      </footer>
     </div>
-    <!-- Footer Content -->
-    <footer>
-      <nav-footer></nav-footer>
-    </footer>
+    <div v-else class="mobile">
+      <img class="under-construction" :src="underConstruction"/>
+    </div>
   </div>
 </template>
 
@@ -33,6 +38,8 @@ import NavBar from "./components/Navigation";
 import NavFooter from "./components/Footer";
 import backgroundImage from "./assets/background.jpg";
 import NprogressContainer from "vue-nprogress/src/NprogressContainer";
+import { isMobile } from "mobile-device-detect";
+import underConstruction from "../src/assets/under_construction.png";
 
 export default {
   components: {
@@ -45,9 +52,12 @@ export default {
     this.$store.dispatch("getPosts", "sales");
     this.$store.dispatch("getPosts", "rentals");
     this.$store.dispatch("getComments");
+    console.log("tt", isMobile);
   },
   data() {
     return {
+      isMobile, 
+      underConstruction,
       backgroundImage: backgroundImage
     };
   }
@@ -142,5 +152,17 @@ body::-webkit-scrollbar,
 
 .v-application--wrap {
   min-height: 0px !important;
+}
+
+.mobile {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.under-construction {
+  height: 300px;
+  width: 300px;
 }
 </style>
