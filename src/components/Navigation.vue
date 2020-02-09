@@ -82,7 +82,7 @@ export default {
       imgProps: {
         height: 200
       },
-      logo: logo
+      logo
     };
   },
   computed: {
