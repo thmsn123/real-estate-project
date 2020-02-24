@@ -52,7 +52,6 @@ export default {
     this.$store.dispatch("getPosts", "sales");
     this.$store.dispatch("getPosts", "rentals");
     this.$store.dispatch("getComments");
-    console.log("tt", isMobile);
   },
   data() {
     return {

@@ -81,8 +81,7 @@
         @change="uploadFiles"
       ></b-form-file>
       <div class="mt-3">
-        Selected files:
-        <span v-for="(file, index) in gallery" :key="index">{{ file.name }}</span>
+        <vue-select-image :dataImages="dataImages" @onselectimage="onSelectImage"></vue-select-image>
       </div>
       <div v-if="uploadMessage" class="alert alert-success">
         <span>{{uploadMessage}}</span>
@@ -105,9 +104,12 @@
 <script>
 import { required, email } from "vuelidate/lib/validators";
 import { mapActions, mapGetters } from "vuex";
+import VueSelectImage from "vue-select-image";
+import "vue-select-image/dist/vue-select-image.css";
 
 export default {
   name: "PostForm",
+  components: { VueSelectImage },
   data() {
     return {
       author: "",
@@ -121,11 +123,19 @@ export default {
       gallery: [],
       content: "",
       preview: "",
-      uploadMessage: ""
+      uploadMessage: "",
+      thumbnail: ""
     };
   },
   computed: {
-    ...mapGetters(["loadedImages", "loadedSales", "loadedRentals"])
+    ...mapGetters(["loadedImages", "loadedSales", "loadedRentals"]),
+    dataImages() {
+      let result = [];
+      this.loadedImages.forEach((element, index) => {
+        result.push({ id: index, src: element });
+      });
+      return result;
+    }
   },
   methods: {
     ...mapActions(["addFilesToStorage"]),
@@ -156,11 +166,15 @@ export default {
         content: this.content,
         preview: this.preview,
         number: this.getNumber(),
+        thumbnail: this.thumbnail,
         date: new Date()
       };
 
       postData.gallery = this.loadedImages.toString();
       this.$emit("submit", postData);
+    },
+    onSelectImage(img) {
+      this.thumbnail = img.src;
     }
   },
   validations: {
@@ -173,3 +187,14 @@ export default {
   }
 };
 </script>
+
+<style>
+.vue-select-image__wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.vue-select-image__item {
+  width: 20%;
+}
+</style>

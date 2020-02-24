@@ -4,7 +4,7 @@
     class="post-preview"
   >
     <v-card class="mx-auto" width="25rem" height="17.5rem">
-      <v-img class="white--text" height="12.5rem" :src="loadedPost.gallery[0]"></v-img>
+      <v-img class="white--text" height="12.5rem" :src="loadedPost.thumbnail ? loadedPost.thumbnail : loadedPost.gallery[0]"></v-img>
       <v-card-text>
         <span class="text--primary title">{{loadedPost.title}}</span>
         <div
