@@ -7,7 +7,7 @@
       <section class="post">
         <h1 class="post-title">{{ currentNews.title }}</h1>
         <div class="post-details">
-          <img class="post-thumbnail" :src="currentNews.gallery[0]" />
+          <img class="post-thumbnail" :src="currentNews.thumbnail ? currentNews.thumbnail : currentNews.gallery[0]" />
         </div>
         <p class="post-content">{{ currentNews.content }}</p>
       </section>
